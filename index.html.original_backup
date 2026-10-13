@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>你好大正妹</title>
+</head>
+
+<body style="background-color:rgba(0, 0, 0, 0.811);">
+
+
+    <h1 style="background-color:SlateBlue;">個人簡介</h1>
+    <br>
+    <p3 style="color:rgba(142, 182, 220, 0.812);">姓名：湯雅心</p3>
+    <br>
+    <p3 style="color:rgba(142, 182, 220, 0.812);">星座：牡羊座</p3>
+    <br>
+    <p3 style="color:rgba(142, 182, 220, 0.812);">學歷：台南應用科技大學</p3>
+    <br>
+    <p3 style="color:rgba(142, 182, 220, 0.812);">興趣：電動、唱歌</p3>
+    <br>
+    <p3 style="color:rgba(142, 182, 220, 0.812);">專長：繪畫、唱歌</p3>
+    <br>
+    <br>
+
+    <p3 style="color:rgba(142, 182, 220, 0.812);">自我介紹：</p3>
+    <p style="color:rgba(142, 182, 220, 0.812);">
+        我是一名脊隨肌肉萎縮的患者，我生性樂觀，待人隨和好相處，喜歡結交朋友，平常沒事喜歡唱歌跟打遊戲，最近的心思都在談戀愛跟小專上，希望能好好度過這段期間。</p>
+    <br>
+    <br>
+    <a style="color:rgba(142, 182, 220, 0.812);" href="https://www.instagram.com/mia._.gashin/" target="_blank">我的IG</a>
+    <br><br>
+    <br>
+    <img src="meinv.jpeg" alt="正妹" height="200" width="200">
+
+</body>
+
+</html>
