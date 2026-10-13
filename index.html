@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湯雅心 Mia | 個人個人簡介</title>
+    <meta name="description" content="湯雅心 Mia 的個人介紹頁面 - 台南應用科技大學，熱愛唱歌、繪畫、電玩遊戲，生性樂觀、熱愛生活的女孩。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== CSS Reset & Design Tokens ===== */
+        :root {
+            --font-main: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            /* Dark Theme Tokens (Default) */
+            --bg-color: #0b0f19;
+            --bg-gradient: radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                #0b0f19;
+            --card-bg: rgba(22, 28, 45, 0.68);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(168, 85, 247, 0.4);
+            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-purple: #a855f7;
+            --accent-pink: #ec4899;
+            --accent-blue: #38bdf8;
+            --badge-bg: rgba(255, 255, 255, 0.06);
+            --badge-border: rgba(255, 255, 255, 0.12);
+            --nav-bg: rgba(11, 15, 25, 0.75);
+        }
+
+        [data-theme="light"] {
+            /* Light Theme Tokens */
+            --bg-color: #fdf8f6;
+            --bg-gradient: radial-gradient(circle at 15% 20%, rgba(244, 114, 182, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 85% 25%, rgba(167, 139, 250, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(125, 211, 252, 0.25) 0%, transparent 55%),
+                #faf5ff;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --card-hover-border: rgba(236, 72, 153, 0.4);
+            --card-shadow: 0 20px 35px -10px rgba(148, 163, 184, 0.2), 0 0 0 1px rgba(226, 232, 240, 0.8);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --badge-bg: rgba(255, 255, 255, 0.85);
+            --badge-border: rgba(226, 232, 240, 0.9);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-gradient);
+            background-color: var(--bg-color);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        /* Ambient animated light particles */
+        .ambient-glow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatGlow 14s ease-in-out infinite alternate;
+        }
+
+        .glow-1 {
+            top: -50px;
+            left: -80px;
+            background: linear-gradient(135deg, #a855f7, #6366f1);
+        }
+
+        .glow-2 {
+            bottom: 5%;
+            right: -60px;
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            animation-delay: -7s;
+        }
+
+        @keyframes floatGlow {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(30px) scale(1.08);
+            }
+
+            100% {
+                transform: translateY(-20px) scale(0.95);
+            }
+        }
+
+        /* ===== Header Navigation ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--card-border);
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .brand-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-pink);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .icon-btn {
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .icon-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-purple);
+            color: var(--accent-pink);
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+        }
+
+        /* ===== Main Container ===== */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.2rem 1.25rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            padding: 2.8rem 2rem 2.2rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ec4899, #a855f7, #38bdf8);
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            cursor: pointer;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #38bdf8);
+            filter: blur(8px);
+            opacity: 0.75;
+            animation: pulseGlow 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.55;
+                transform: scale(0.98);
+            }
+
+            100% {
+                opacity: 0.85;
+                transform: scale(1.04);
+            }
+        }
+
+        .avatar-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+            border-radius: 50%;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            transition: var(--transition-bounce);
+        }
+
+        .avatar-container:hover .avatar-img {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(236, 72, 153, 0.12);
+            color: var(--accent-pink);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 0.35rem 0.95rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.9rem;
+            animation: subtleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes subtleBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+        .hero-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
+            background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        [data-theme="light"] .hero-name {
+            background: linear-gradient(135deg, #0f172a 30%, #334155 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .subtitle-dot {
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+        }
+
+        /* Pill Badges */
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .info-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .info-pill:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-purple);
+            color: var(--text-primary);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .info-pill i {
+            color: var(--accent-purple);
+        }
+
+        .info-pill.aries i {
+            color: #f43f5e;
+        }
+
+        .info-pill.school i {
+            color: #38bdf8;
+        }
+
+        /* ===== Section Title ===== */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 2rem 0 1.1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-header i {
+            color: var(--accent-pink);
+            font-size: 1.15rem;
+        }
+
+        /* ===== Content Cards ===== */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 1.8rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--card-hover-border);
+            transform: translateY(-3px);
+            box-shadow: 0 24px 45px -12px rgba(0, 0, 0, 0.4), 0 0 15px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Quote / Bio Styling */
+        .quote-box {
+            position: relative;
+            padding: 1.4rem 1.6rem;
+            background: rgba(168, 85, 247, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 16px 16px 0;
+            margin-bottom: 1.2rem;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-primary);
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .highlight-quote {
+            background: linear-gradient(120deg, rgba(236, 72, 153, 0.18) 0%, rgba(168, 85, 247, 0.18) 100%);
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .mood-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .mood-tag {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== Grid Cards for Hobbies / Talents ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 520px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 1.4rem 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.35);
+        }
+
+        .feature-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+            transition: var(--transition-bounce);
+        }
+
+        .feature-card:hover .feature-icon-box {
+            transform: scale(1.1) rotate(4deg);
+        }
+
+        .icon-singing {
+            background: rgba(236, 72, 153, 0.15);
+            color: #ec4899;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .icon-drawing {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .icon-gaming {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .icon-friends {
+            background: rgba(251, 146, 60, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .feature-details h4 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .feature-type-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            background: var(--badge-bg);
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .feature-details p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        /* ===== Instagram Featured Banner ===== */
+        .instagram-card {
+            background: linear-gradient(135deg, rgba(240, 148, 51, 0.1) 0%, rgba(220, 39, 67, 0.12) 50%, rgba(188, 24, 136, 0.1) 100%), var(--card-bg);
+            border: 1px solid rgba(220, 39, 67, 0.3);
+            border-radius: 24px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instagram-card::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(220, 39, 67, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .instagram-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(220, 39, 67, 0.6);
+            box-shadow: 0 16px 35px -10px rgba(220, 39, 67, 0.25);
+        }
+
+        .ig-profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ig-icon-badge {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 18px rgba(220, 39, 67, 0.35);
+        }
+
+        .ig-text-box h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .ig-text-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .ig-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-bounce);
+            box-shadow: 0 8px 20px rgba(220, 39, 67, 0.3);
+        }
+
+        .ig-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 28px rgba(220, 39, 67, 0.45);
+            color: #ffffff;
+        }
+
+        /* ===== Cheer / Love Interactive Section ===== */
+        .cheer-box {
+            text-align: center;
+            background: var(--card-bg);
+            border: 1px dashed var(--card-border);
+            border-radius: 24px;
+            padding: 2.2rem 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .cheer-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .cheer-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .cheer-btn {
+            position: relative;
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            color: #ffffff;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 999px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: var(--transition-bounce);
+            overflow: visible;
+        }
+
+        .cheer-btn:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 14px 30px rgba(236, 72, 153, 0.5);
+        }
+
+        .cheer-btn:active {
+            transform: scale(0.96);
+        }
+
+        .heart-count-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        /* Floating Hearts Particles */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 1.8rem;
+            animation: floatUp 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.6) rotate(0deg);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: translate(var(--dx), -80px) scale(1.2) rotate(var(--rot));
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx2), -180px) scale(0.9) rotate(calc(var(--rot) * 2));
+            }
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer p {
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-heart {
+            color: #ec4899;
+            display: inline-block;
+            animation: beat 1.5s infinite;
+        }
+
+        @keyframes beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* ===== Lightbox Modal ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transform: scale(0.92);
+            transition: var(--transition-bounce);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            background: #ffffff;
+            color: #0f172a;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* ===== Toast Notification ===== */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(15, 23, 42, 0.95);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: #10b981;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <a href="#" class="nav-brand">
+            <img src="meinv.jpeg" alt="Mia" class="brand-avatar">
+            <span>Mia's Space</span>
+        </a>
+        <div class="nav-actions">
+            <button class="icon-btn" id="shareBtn" title="分享名片" aria-label="分享名片">
+                <i class="fa-solid fa-share-nodes"></i>
+            </button>
+            <button class="icon-btn" id="themeToggle" title="切換色彩模式" aria-label="切換外觀主題">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero Profile Card -->
+        <section class="hero-card">
+            <!-- Avatar with Lightbox Trigger -->
+            <div class="avatar-container" id="avatarTrigger" title="點擊檢視高畫質照片">
+                <div class="avatar-glow"></div>
+                <img src="meinv.jpeg" alt="湯雅心" class="avatar-img" id="heroPhoto">
+            </div>
+
+            <!-- Status Pill -->
+            <div>
+                <span class="badge-status">
+                    <i class="fa-solid fa-sparkles"></i> 樂觀熱情・用心生活
+                </span>
+            </div>
+
+            <!-- Name & Subtitle -->
+            <h1 class="hero-name">湯雅心</h1>
+            <p class="hero-subtitle">
+                <span>Mia</span>
+                <span class="subtitle-dot">●</span>
+                <span>勇敢逐夢的樂天女孩</span>
+            </p>
+
+            <!-- Quick Info Badges -->
+            <div class="tag-group">
+                <div class="info-pill aries">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>牡羊座 (Aries)</span>
+                </div>
+                <div class="info-pill school">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>台南應用科技大學</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <div class="section-header">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>關於我・About Me</span>
+        </div>
+        <section class="card">
+            <div class="quote-box">
+                <p class="quote-text">
+                    「我是一名<span
+                        class="highlight-quote">脊髓肌肉萎縮</span>的患者，但我生性樂觀，待人隨和好相處，喜歡結交朋友！平常沒事喜歡唱歌跟打遊戲，最近的心思都在談戀愛跟小專上，希望能好好度過這段期間。✨」
+                </p>
+            </div>
+            <div class="mood-tags">
+                <span class="mood-tag"># 生命勇者</span>
+                <span class="mood-tag"># 生性樂觀隨和</span>
+                <span class="mood-tag"># 喜歡交朋友</span>
+                <span class="mood-tag"># 小專衝刺中</span>
+                <span class="mood-tag"># 戀愛ING 💕</span>
+            </div>
+        </section>
+
+        <!-- Interests & Talents Section -->
+        <div class="section-header">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>專長與興趣・Passions & Talents</span>
+        </div>
+        <div class="skills-grid">
+            <!-- 唱歌 -->
+            <div class="feature-card">
+                <div class="feature-icon-box icon-singing">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <div class="feature-details">
+                    <h4>唱歌 <span class="feature-type-tag">專長 & 興趣</span></h4>
+                    <p>平常最喜歡放鬆歌唱，用旋律傳遞心情與溫暖，是生活中不可或缺的快樂。</p>
+                </div>
+            </div>
+
+            <!-- 繪畫 -->
+            <div class="feature-card">
+                <div class="feature-icon-box icon-drawing">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="feature-details">
+                    <h4>繪畫 <span class="feature-type-tag">個人專長</span></h4>
+                    <p>發揮天馬行空的想像力，將心中的色彩描繪成美麗的畫面。</p>
+                </div>
+            </div>
+
+            <!-- 電動 -->
+            <div class="feature-card">
+                <div class="feature-icon-box icon-gaming">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <div class="feature-details">
+                    <h4>打遊戲 <span class="feature-type-tag">休閒愛好</span></h4>
+                    <p>閒暇時沉浸在遊戲世界中探險挑戰，享受闖關與互動的滿滿樂趣。</p>
+                </div>
+            </div>
+
+            <!-- 待人相處 -->
+            <div class="feature-card">
+                <div class="feature-icon-box icon-friends">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <div class="feature-details">
+                    <h4>隨和交友 <span class="feature-type-tag">個人特質</span></h4>
+                    <p>待人親切好相處，熱情真誠，珍惜身邊每位相遇與陪伴的朋友！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Connection Card -->
+        <div class="section-header">
+            <i class="fa-brands fa-instagram"></i>
+            <span>社群追蹤・Connect</span>
+        </div>
+        <div class="instagram-card">
+            <div class="ig-profile-info">
+                <div class="ig-icon-badge">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="ig-text-box">
+                    <h3>Instagram</h3>
+                    <p>@mia._.gashin ・ 追蹤我的精彩生活動態</p>
+                </div>
+            </div>
+            <a href="https://www.instagram.com/mia._.gashin/" target="_blank" rel="noopener noreferrer" class="ig-btn">
+                <span>前往追蹤</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+
+        <!-- Interactive Cheer & Heart Section -->
+        <section class="cheer-box">
+            <h3 class="cheer-title">為雅心送上滿滿的祝福與鼓勵 ✨</h3>
+            <p class="cheer-desc">點擊下方按鈕，送出愛心，一起為雅心的小專與生活加油打氣！</p>
+            <button class="cheer-btn" id="cheerBtn" aria-label="點擊送出愛心">
+                <i class="fa-solid fa-heart"></i>
+                <span>送出愛心</span>
+                <span class="heart-count-badge" id="heartCounter">520</span>
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with <span class="footer-heart">❤</span> for 湯雅心 Mia</p>
+            <p>珍惜當下，微笑面對每個精彩明天 🌈</p>
+        </footer>
+
+    </main>
+
+    <!-- Photo Lightbox Modal -->
+    <div class="modal-overlay" id="photoModal" role="dialog" aria-modal="true" aria-label="相片預覽">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModalBtn" aria-label="關閉預覽">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img src="meinv.jpeg" alt="湯雅心 Mia 高畫質照片" class="modal-img">
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastBox">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">已成功複製名片連結！</span>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Theme Toggle (Dark / Light)
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Check local storage for theme
+        const savedTheme = localStorage.getItem('mia_theme') || 'dark';
+        applyTheme(savedTheme);
+
+        function applyTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            if (theme === 'light') {
+                themeIcon.className = 'fa-solid fa-sun';
+                themeIcon.style.color = '#f59e0b';
+            } else {
+                themeIcon.className = 'fa-solid fa-moon';
+                themeIcon.style.color = '';
+            }
+            localStorage.setItem('mia_theme', theme);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+
+        // Photo Modal Lightbox
+        const avatarTrigger = document.getElementById('avatarTrigger');
+        const photoModal = document.getElementById('photoModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal() {
+            photoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            photoModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        avatarTrigger.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        photoModal.addEventListener('click', (e) => {
+            if (e.target === photoModal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && photoModal.classList.contains('active')) closeModal();
+        });
+
+        // Cheer Heart Button & Floating Particle Effect
+        const cheerBtn = document.getElementById('cheerBtn');
+        const heartCounter = document.getElementById('heartCounter');
+        let likes = parseInt(localStorage.getItem('mia_hearts') || '520', 10);
+        heartCounter.textContent = likes;
+
+        // Web Audio Synthesizer for sweet sparkle chime
+        let audioCtx = null;
+        function playChime() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                // Sweet pleasant musical note
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                const note = notes[Math.floor(Math.random() * notes.length)];
+                osc.frequency.setValueAtTime(note, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.35);
+            } catch (err) {
+                // Audio gracefully ignored if unavailable
+            }
+        }
+
+        cheerBtn.addEventListener('click', (e) => {
+            likes++;
+            heartCounter.textContent = likes;
+            localStorage.setItem('mia_hearts', likes);
+            playChime();
+
+            // Spawn floating hearts
+            const rect = cheerBtn.getBoundingClientRect();
+            const heartIcons = ['💖', '❤️', '🌸', '✨', '💕', '🥰', '⭐'];
+
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+
+                    const startX = rect.left + rect.width / 2 + (Math.random() * 40 - 20);
+                    const startY = rect.top + (Math.random() * 20);
+
+                    const dx = (Math.random() * 80 - 40) + 'px';
+                    const dx2 = (Math.random() * 120 - 60) + 'px';
+                    const rot = (Math.random() * 40 - 20) + 'deg';
+
+                    heart.style.left = `${startX}px`;
+                    heart.style.top = `${startY}px`;
+                    heart.style.setProperty('--dx', dx);
+                    heart.style.setProperty('--dx2', dx2);
+                    heart.style.setProperty('--rot', rot);
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 1600);
+                }, i * 90);
+            }
+        });
+
+        // Share Profile Button
+        const shareBtn = document.getElementById('shareBtn');
+        const toastBox = document.getElementById('toastBox');
+        const toastMsg = document.getElementById('toastMsg');
+        let toastTimeout;
+
+        function showToast(message) {
+            toastMsg.textContent = message;
+            toastBox.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastBox.classList.remove('show');
+            }, 2600);
+        }
+
+        shareBtn.addEventListener('click', async () => {
+            const pageUrl = window.location.href;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: '湯雅心 Mia 的個人主頁',
+                        text: '來看看湯雅心的個人介紹與生活！✨',
+                        url: pageUrl
+                    });
+                    return;
+                } catch (err) {
+                    // Fallback to clipboard
+                }
+            }
+
+            try {
+                await navigator.clipboard.writeText(pageUrl);
+                showToast('已成功複製個人名片網址！');
+            } catch (err) {
+                showToast('歡迎將網頁分享給好友！');
+            }
+        });
+    </script>
+</body>
+
+</html>
