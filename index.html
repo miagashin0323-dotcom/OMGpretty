@@ -1,69 +1,245 @@
 <!DOCTYPE html>
-<html lang="zh-Hant" data-theme="dark">
+<html lang="zh-Hant" data-theme="dark" data-palette="ocean">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>湯雅心 Mia | 個人個人簡介</title>
-    <meta name="description" content="湯雅心 Mia 的個人介紹頁面 - 台南應用科技大學，熱愛唱歌、繪畫、電玩遊戲，生性樂觀、熱愛生活的女孩。">
+    <title>湯雅心 Mia | 數位個人檔案・Personal Studio Space</title>
+    <meta name="description" content="湯雅心 Mia 的個人空間 - 台南應用科技大學，熱愛唱歌、繪畫、電玩遊戲，生性樂觀隨和、用心生活的女孩。">
+    <meta name="theme-color" content="#070d18">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* ===== CSS Reset & Design Tokens ===== */
+        /* ========================================================
+           DESIGN TOKENS & SYSTEM
+           ======================================================== */
         :root {
             --font-main: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-display: 'Outfit', 'Noto Sans TC', sans-serif;
             --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-            /* Dark Theme Tokens (Default) */
-            --bg-color: #0b0f19;
-            --bg-gradient: radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.18) 0%, transparent 40%),
-                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.16) 0%, transparent 45%),
-                radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
-                #0b0f19;
-            --card-bg: rgba(22, 28, 45, 0.68);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-hover-border: rgba(168, 85, 247, 0.4);
-            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+            /* Default Palette: 🌊 蔚藍海風 (Ocean Azure) */
+            --theme-primary: #0284c7;
+            --theme-primary-light: #38bdf8;
+            --theme-primary-glow: rgba(14, 165, 233, 0.35);
+            --theme-secondary: #06b6d4;
+            --theme-secondary-glow: rgba(6, 182, 212, 0.28);
+            --theme-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #6366f1 100%);
+            --theme-btn-gradient: linear-gradient(135deg, #0284c7, #06b6d4);
+            --theme-glow-1: linear-gradient(135deg, #0284c7, #6366f1);
+            --theme-glow-2: linear-gradient(135deg, #06b6d4, #14b8a6);
+
+            /* Dark Mode UI Tokens (Studio Midnight) */
+            --bg-color: #080d1a;
+            --bg-mesh: radial-gradient(circle at 10% 10%, rgba(14, 165, 233, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(6, 182, 212, 0.16) 0%, transparent 45%),
+                radial-gradient(circle at 50% 70%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
+                #080d1a;
+            --surface-glass: rgba(15, 23, 42, 0.72);
+            --surface-glass-card: rgba(17, 26, 46, 0.68);
+            --surface-subtle: rgba(255, 255, 255, 0.04);
+            --surface-subtle-hover: rgba(255, 255, 255, 0.07);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass-glow: rgba(56, 189, 248, 0.4);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
-            --accent-purple: #a855f7;
-            --accent-pink: #ec4899;
-            --accent-blue: #38bdf8;
-            --badge-bg: rgba(255, 255, 255, 0.06);
-            --badge-border: rgba(255, 255, 255, 0.12);
-            --nav-bg: rgba(11, 15, 25, 0.75);
+            --shadow-card: 0 16px 36px -12px rgba(0, 0, 0, 0.55), inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+            --shadow-hover: 0 24px 48px -10px rgba(0, 0, 0, 0.65), 0 0 24px var(--theme-primary-glow);
+            --nav-bg: rgba(8, 13, 26, 0.85);
+            --modal-bg: rgba(12, 18, 32, 0.96);
         }
 
+        /* ===== Light Theme Base Tokens (Studio Pure Ivory) ===== */
         [data-theme="light"] {
-            /* Light Theme Tokens */
-            --bg-color: #fdf8f6;
-            --bg-gradient: radial-gradient(circle at 15% 20%, rgba(244, 114, 182, 0.2) 0%, transparent 45%),
-                radial-gradient(circle at 85% 25%, rgba(167, 139, 250, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, rgba(125, 211, 252, 0.25) 0%, transparent 55%),
-                #faf5ff;
-            --card-bg: rgba(255, 255, 255, 0.75);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --card-hover-border: rgba(236, 72, 153, 0.4);
-            --card-shadow: 0 20px 35px -10px rgba(148, 163, 184, 0.2), 0 0 0 1px rgba(226, 232, 240, 0.8);
-            --text-primary: #1e293b;
+            --bg-color: #f4f8fc;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(186, 230, 253, 0.55) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(165, 243, 252, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 50% 65%, rgba(224, 231, 255, 0.4) 0%, transparent 55%),
+                #f8fafc;
+            --surface-glass: rgba(255, 255, 255, 0.82);
+            --surface-glass-card: rgba(255, 255, 255, 0.86);
+            --surface-subtle: rgba(0, 0, 0, 0.03);
+            --surface-subtle-hover: rgba(0, 0, 0, 0.05);
+            --border-glass: rgba(226, 232, 240, 0.85);
+            --border-glass-glow: rgba(14, 165, 233, 0.35);
+            --text-primary: #0f172a;
             --text-secondary: #475569;
             --text-muted: #94a3b8;
-            --badge-bg: rgba(255, 255, 255, 0.85);
-            --badge-border: rgba(226, 232, 240, 0.9);
-            --nav-bg: rgba(255, 255, 255, 0.8);
+            --shadow-card: 0 12px 30px -8px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.95), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+            --shadow-hover: 0 20px 40px -10px rgba(14, 165, 233, 0.2), 0 0 0 1px rgba(14, 165, 233, 0.4);
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --modal-bg: rgba(255, 255, 255, 0.98);
         }
 
+        /* ===== 🌊 Palette 1: 蔚藍海風 (Ocean Azure - Default) ===== */
+        [data-palette="ocean"] {
+            --theme-primary: #0284c7;
+            --theme-primary-light: #38bdf8;
+            --theme-primary-glow: rgba(14, 165, 233, 0.38);
+            --theme-secondary: #06b6d4;
+            --theme-secondary-glow: rgba(6, 182, 212, 0.3);
+            --theme-gradient: linear-gradient(135deg, #0ea5e9, #06b6d4, #6366f1);
+            --theme-btn-gradient: linear-gradient(135deg, #0284c7, #06b6d4);
+            --theme-glow-1: linear-gradient(135deg, #0284c7, #6366f1);
+            --theme-glow-2: linear-gradient(135deg, #06b6d4, #14b8a6);
+        }
+
+        [data-palette="ocean"][data-theme="dark"] {
+            --bg-color: #070d18;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(14, 165, 233, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(6, 182, 212, 0.18) 0%, transparent 45%),
+                #070d18;
+        }
+
+        /* ===== 🌿 Palette 2: 晨曦薄荷 (Forest Mint) ===== */
+        [data-palette="mint"] {
+            --theme-primary: #059669;
+            --theme-primary-light: #10b981;
+            --theme-primary-glow: rgba(16, 185, 129, 0.38);
+            --theme-secondary: #047857;
+            --theme-secondary-glow: rgba(5, 150, 105, 0.3);
+            --theme-gradient: linear-gradient(135deg, #10b981, #34d399, #06b6d4);
+            --theme-btn-gradient: linear-gradient(135deg, #059669, #10b981);
+            --theme-glow-1: linear-gradient(135deg, #059669, #10b981);
+            --theme-glow-2: linear-gradient(135deg, #34d399, #0284c7);
+        }
+
+        [data-palette="mint"][data-theme="dark"] {
+            --bg-color: #05120d;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(16, 185, 129, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(52, 211, 153, 0.16) 0%, transparent 45%),
+                #05120d;
+        }
+
+        [data-palette="mint"][data-theme="light"] {
+            --bg-color: #f0fdf4;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(167, 243, 208, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(110, 231, 183, 0.42) 0%, transparent 45%),
+                #f0fdf4;
+        }
+
+        /* ===== 🌅 Palette 3: 落日暖陽 (Sunset Amber) ===== */
+        [data-palette="sunset"] {
+            --theme-primary: #ea580c;
+            --theme-primary-light: #f97316;
+            --theme-primary-glow: rgba(249, 115, 22, 0.38);
+            --theme-secondary: #e11d48;
+            --theme-secondary-glow: rgba(225, 29, 72, 0.3);
+            --theme-gradient: linear-gradient(135deg, #f97316, #fbbf24, #e11d48);
+            --theme-btn-gradient: linear-gradient(135deg, #ea580c, #f43f5e);
+            --theme-glow-1: linear-gradient(135deg, #f97316, #e11d48);
+            --theme-glow-2: linear-gradient(135deg, #fbbf24, #ea580c);
+        }
+
+        [data-palette="sunset"][data-theme="dark"] {
+            --bg-color: #140c08;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(249, 115, 22, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(225, 29, 72, 0.16) 0%, transparent 45%),
+                #140c08;
+        }
+
+        [data-palette="sunset"][data-theme="light"] {
+            --bg-color: #fffbeb;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(254, 215, 170, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(254, 202, 202, 0.45) 0%, transparent 45%),
+                #fffbeb;
+        }
+
+        /* ===== 🍇 Palette 4: 星河幻紫 (Cosmic Lavender) ===== */
+        [data-palette="lavender"] {
+            --theme-primary: #7c3aed;
+            --theme-primary-light: #a78bfa;
+            --theme-primary-glow: rgba(124, 58, 237, 0.38);
+            --theme-secondary: #4f46e5;
+            --theme-secondary-glow: rgba(79, 70, 229, 0.3);
+            --theme-gradient: linear-gradient(135deg, #8b5cf6, #c084fc, #4f46e5);
+            --theme-btn-gradient: linear-gradient(135deg, #7c3aed, #4f46e5);
+            --theme-glow-1: linear-gradient(135deg, #8b5cf6, #4f46e5);
+            --theme-glow-2: linear-gradient(135deg, #c084fc, #7c3aed);
+        }
+
+        [data-palette="lavender"][data-theme="dark"] {
+            --bg-color: #0c0a17;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(139, 92, 246, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(79, 70, 229, 0.18) 0%, transparent 45%),
+                #0c0a17;
+        }
+
+        [data-palette="lavender"][data-theme="light"] {
+            --bg-color: #faf5ff;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(233, 213, 255, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(199, 210, 254, 0.45) 0%, transparent 45%),
+                #faf5ff;
+        }
+
+        /* ===== 🌸 Palette 5: 浪漫櫻粉 (Sakura Blossom) ===== */
+        [data-palette="sakura"] {
+            --theme-primary: #db2777;
+            --theme-primary-light: #f472b6;
+            --theme-primary-glow: rgba(219, 39, 119, 0.38);
+            --theme-secondary: #e11d48;
+            --theme-secondary-glow: rgba(225, 29, 72, 0.3);
+            --theme-gradient: linear-gradient(135deg, #ec4899, #f43f5e, #a855f7);
+            --theme-btn-gradient: linear-gradient(135deg, #db2777, #e11d48);
+            --theme-glow-1: linear-gradient(135deg, #a855f7, #6366f1);
+            --theme-glow-2: linear-gradient(135deg, #ec4899, #f43f5e);
+        }
+
+        [data-palette="sakura"][data-theme="dark"] {
+            --bg-color: #0c0812;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(219, 39, 119, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(168, 85, 247, 0.18) 0%, transparent 45%),
+                #0c0812;
+        }
+
+        [data-palette="sakura"][data-theme="light"] {
+            --bg-color: #fdf5f8;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(244, 114, 182, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(251, 113, 133, 0.45) 0%, transparent 45%),
+                #fdf5f8;
+        }
+
+        /* ===== ✨ Palette 6: 黑金輕奢 (Champagne Gold) ===== */
+        [data-palette="gold"] {
+            --theme-primary: #d97706;
+            --theme-primary-light: #fbbf24;
+            --theme-primary-glow: rgba(217, 119, 6, 0.38);
+            --theme-secondary: #b45309;
+            --theme-secondary-glow: rgba(180, 83, 9, 0.3);
+            --theme-gradient: linear-gradient(135deg, #d97706, #fbbf24, #f59e0b);
+            --theme-btn-gradient: linear-gradient(135deg, #d97706, #b45309);
+            --theme-glow-1: linear-gradient(135deg, #d97706, #78350f);
+            --theme-glow-2: linear-gradient(135deg, #fbbf24, #b45309);
+        }
+
+        [data-palette="gold"][data-theme="dark"] {
+            --bg-color: #12100a;
+            --bg-mesh: radial-gradient(circle at 10% 12%, rgba(217, 119, 6, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.16) 0%, transparent 45%),
+                #12100a;
+        }
+
+        [data-palette="gold"][data-theme="light"] {
+            --bg-color: #fffdf7;
+            --bg-mesh: radial-gradient(circle at 15% 10%, rgba(254, 240, 138, 0.5) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(253, 230, 138, 0.42) 0%, transparent 45%),
+                #fffdf7;
+        }
+
+        /* ========================================================
+           GLOBAL RESETS & BACKGROUND
+           ======================================================== */
         * {
             margin: 0;
             padding: 0;
@@ -76,41 +252,70 @@
 
         body {
             font-family: var(--font-main);
-            background: var(--bg-gradient);
+            background: var(--bg-mesh);
             background-color: var(--bg-color);
             background-attachment: fixed;
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.65;
             position: relative;
             overflow-x: hidden;
-            transition: background 0.4s ease, color 0.4s ease;
+            transition: background 0.45s ease, color 0.45s ease;
         }
 
-        /* Ambient animated light particles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--theme-primary-glow);
+            border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--theme-primary);
+        }
+
+        /* Dynamic Stardust Canvas */
+        #heartCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.75;
+        }
+
+        /* Ambient Glowing Aura Orbs */
         .ambient-glow {
             position: fixed;
-            width: 450px;
-            height: 450px;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(140px);
             opacity: 0.35;
             pointer-events: none;
             z-index: 0;
-            animation: floatGlow 14s ease-in-out infinite alternate;
+            animation: floatGlow 18s ease-in-out infinite alternate;
+            transition: background 0.6s ease;
         }
 
         .glow-1 {
-            top: -50px;
-            left: -80px;
-            background: linear-gradient(135deg, #a855f7, #6366f1);
+            top: -150px;
+            left: -150px;
+            background: var(--theme-glow-1);
         }
 
         .glow-2 {
             bottom: 5%;
-            right: -60px;
-            background: linear-gradient(135deg, #ec4899, #f43f5e);
-            animation-delay: -7s;
+            right: -150px;
+            background: var(--theme-glow-2);
+            animation-delay: -9s;
         }
 
         @keyframes floatGlow {
@@ -119,375 +324,908 @@
             }
 
             50% {
-                transform: translateY(30px) scale(1.08);
+                transform: translateY(60px) scale(1.1);
             }
 
             100% {
-                transform: translateY(-20px) scale(0.95);
+                transform: translateY(-40px) scale(0.92);
             }
         }
 
-        /* ===== Header Navigation ===== */
-        .navbar {
+        /* ========================================================
+           TOP NAVIGATION BAR (FLOATING GLASS PILL)
+           ======================================================== */
+        .navbar-wrap {
             position: sticky;
-            top: 0;
+            top: 1rem;
             z-index: 100;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        .navbar {
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
             background: var(--nav-bg);
-            border-bottom: 1px solid var(--card-border);
-            padding: 0.9rem 1.5rem;
+            border: 1px solid var(--border-glass);
+            border-radius: 999px;
+            padding: 0.65rem 1.4rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
         .nav-brand {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
+            gap: 0.75rem;
             text-decoration: none;
+            color: var(--text-primary);
         }
 
         .brand-avatar {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-pink);
+            border: 2px solid var(--theme-primary);
+            box-shadow: 0 0 10px var(--theme-primary-glow);
+        }
+
+        .brand-text-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            font-family: var(--font-display);
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--theme-primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-tag {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            position: relative;
         }
 
         .icon-btn {
-            background: var(--badge-bg);
-            border: 1px solid var(--badge-border);
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
             color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             cursor: pointer;
             transition: var(--transition-smooth);
         }
 
         .icon-btn:hover {
             transform: translateY(-2px);
-            border-color: var(--accent-purple);
-            color: var(--accent-pink);
-            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+            border-color: var(--theme-primary);
+            color: var(--theme-primary);
+            box-shadow: 0 6px 16px var(--theme-primary-glow);
+            background: var(--surface-subtle-hover);
         }
 
-        /* ===== Main Container ===== */
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 2.2rem 1.25rem 4rem;
+        .icon-btn.active {
+            color: var(--theme-primary);
+            border-color: var(--theme-primary);
+            background: var(--theme-primary-glow);
+        }
+
+        /* Palette Dropdown */
+        .palette-dropdown {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            background: var(--modal-bg);
+            backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 1rem;
+            width: 270px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px) scale(0.96);
+            transition: var(--transition-bounce);
+            z-index: 120;
+        }
+
+        .palette-dropdown.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .palette-dropdown-title {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .palette-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.6rem;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .palette-pill:hover {
+            transform: translateY(-2px);
+            border-color: var(--theme-primary);
+        }
+
+        .palette-pill.active {
+            border-color: var(--theme-primary);
+            background: var(--theme-primary-glow);
+            color: var(--theme-primary);
+        }
+
+        .palette-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Top Reading Progress Bar */
+        .scroll-progress-line {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: var(--theme-gradient);
+            border-radius: 999px;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* ========================================================
+           MAIN LAYOUT: ASYMMETRICAL STUDIO BENTO (SPLIT GRID)
+           ======================================================== */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto 5rem;
+            padding: 0 1.25rem;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 1.8rem;
+            align-items: start;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== Hero Section ===== */
-        .hero-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            padding: 2.8rem 2rem 2.2rem;
-            box-shadow: var(--card-shadow);
+        @media (max-width: 980px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========================================================
+           LEFT COLUMN: STICKY HERO PROFILE COCKPIT
+           ======================================================== */
+        .sidebar-sticky {
+            position: sticky;
+            top: 5.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 980px) {
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        .hero-profile-card {
+            background: var(--surface-glass);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 2.2rem 1.8rem 1.8rem;
+            box-shadow: var(--shadow-card);
             text-align: center;
             position: relative;
             overflow: hidden;
             transition: var(--transition-smooth);
-            margin-bottom: 1.8rem;
         }
 
-        .hero-card::before {
+        .hero-profile-card::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ec4899, #a855f7, #38bdf8);
+            background: var(--theme-gradient);
         }
 
-        .avatar-container {
+        /* Avatar Spotlight */
+        .avatar-box {
             position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 1.5rem;
+            width: 148px;
+            height: 148px;
+            margin: 0 auto 1.4rem;
             cursor: pointer;
+            perspective: 800px;
         }
 
-        .avatar-glow {
+        .avatar-glow-ring {
             position: absolute;
-            inset: -4px;
+            inset: -6px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ec4899, #8b5cf6, #38bdf8);
-            filter: blur(8px);
+            background: conic-gradient(from 0deg, var(--theme-primary), var(--theme-secondary), var(--theme-primary-light), var(--theme-primary));
+            filter: blur(10px);
             opacity: 0.75;
-            animation: pulseGlow 3.5s ease-in-out infinite alternate;
+            animation: spinAura 10s linear infinite;
         }
 
-        @keyframes pulseGlow {
+        @keyframes spinAura {
             0% {
-                opacity: 0.55;
-                transform: scale(0.98);
+                transform: rotate(0deg);
             }
 
             100% {
-                opacity: 0.85;
-                transform: scale(1.04);
+                transform: rotate(360deg);
             }
         }
 
-        .avatar-img {
+        .avatar-frame {
             position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--surface-glass-card);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            transition: var(--transition-bounce);
+        }
+
+        .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center 25%;
-            border-radius: 50%;
-            border: 4px solid var(--card-bg);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-            transition: var(--transition-bounce);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .avatar-container:hover .avatar-img {
-            transform: scale(1.05) rotate(1deg);
+        .avatar-box:hover .avatar-frame {
+            transform: scale(1.05);
         }
 
-        .badge-status {
+        .avatar-box:hover .avatar-img {
+            transform: scale(1.1);
+        }
+
+        .avatar-badge-tip {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .avatar-box:hover .avatar-badge-tip {
+            background: var(--theme-primary);
+            border-color: transparent;
+            transform: translateX(-50%) translateY(2px) scale(1.05);
+        }
+
+        .status-chip {
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
-            background: rgba(236, 72, 153, 0.12);
-            color: var(--accent-pink);
-            border: 1px solid rgba(236, 72, 153, 0.3);
+            background: var(--theme-primary-glow);
+            color: var(--theme-primary);
+            border: 1px solid var(--theme-primary);
             padding: 0.35rem 0.95rem;
             border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.82rem;
+            font-weight: 700;
             margin-bottom: 0.9rem;
-            animation: subtleBounce 2s ease-in-out infinite;
         }
 
-        @keyframes subtleBounce {
+        .status-dot-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseBeacon 2s infinite;
+        }
 
-            0%,
-            100% {
-                transform: translateY(0);
+        @keyframes pulseBeacon {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.8;
             }
 
             50% {
-                transform: translateY(-2px);
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0.8;
             }
         }
 
-        .hero-name {
-            font-size: 2.2rem;
-            font-weight: 800;
+        .hero-title-name {
+            font-size: 2.3rem;
+            font-family: var(--font-display);
+            font-weight: 900;
             letter-spacing: -0.02em;
-            margin-bottom: 0.35rem;
-            background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 70%);
+            line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 30%, var(--theme-primary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        [data-theme="light"] .hero-name {
-            background: linear-gradient(135deg, #0f172a 30%, #334155 70%);
+        [data-theme="light"] .hero-title-name {
+            background: linear-gradient(135deg, #0f172a 30%, var(--theme-primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
-            font-size: 1.05rem;
+        .hero-bio-subtitle {
+            font-size: 1rem;
             color: var(--text-secondary);
             font-weight: 500;
+            margin: 0.35rem 0 1.2rem;
+        }
+
+        /* Identity Pills */
+        .identity-pills-list {
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 0.5rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.6rem;
         }
 
-        .subtitle-dot {
-            color: var(--accent-purple);
-            font-size: 0.8rem;
-        }
-
-        /* Pill Badges */
-        .tag-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-
-        .info-pill {
+        .id-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            padding: 0.45rem 0.95rem;
+            gap: 0.4rem;
+            padding: 0.4rem 0.85rem;
             border-radius: 999px;
-            background: var(--badge-bg);
-            border: 1px solid var(--badge-border);
-            font-size: 0.88rem;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            font-size: 0.82rem;
             color: var(--text-secondary);
-            font-weight: 500;
-            transition: var(--transition-smooth);
-        }
-
-        .info-pill:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-purple);
-            color: var(--text-primary);
-            background: rgba(168, 85, 247, 0.1);
-        }
-
-        .info-pill i {
-            color: var(--accent-purple);
-        }
-
-        .info-pill.aries i {
-            color: #f43f5e;
-        }
-
-        .info-pill.school i {
-            color: #38bdf8;
-        }
-
-        /* ===== Section Title ===== */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin: 2rem 0 1.1rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .section-header i {
-            color: var(--accent-pink);
-            font-size: 1.15rem;
-        }
-
-        /* ===== Content Cards ===== */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 1.8rem;
-            box-shadow: var(--card-shadow);
-            transition: var(--transition-smooth);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .card:hover {
-            border-color: var(--card-hover-border);
-            transform: translateY(-3px);
-            box-shadow: 0 24px 45px -12px rgba(0, 0, 0, 0.4), 0 0 15px rgba(168, 85, 247, 0.15);
-        }
-
-        /* Quote / Bio Styling */
-        .quote-box {
-            position: relative;
-            padding: 1.4rem 1.6rem;
-            background: rgba(168, 85, 247, 0.05);
-            border-left: 4px solid var(--accent-purple);
-            border-radius: 0 16px 16px 0;
-            margin-bottom: 1.2rem;
-        }
-
-        .quote-text {
-            font-size: 1.05rem;
-            line-height: 1.85;
-            color: var(--text-primary);
-            font-weight: 400;
-            letter-spacing: 0.01em;
-        }
-
-        .highlight-quote {
-            background: linear-gradient(120deg, rgba(236, 72, 153, 0.18) 0%, rgba(168, 85, 247, 0.18) 100%);
-            padding: 0.1rem 0.35rem;
-            border-radius: 4px;
             font-weight: 600;
         }
 
-        .mood-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .id-pill i {
+            color: var(--theme-primary);
         }
 
-        .mood-tag {
-            font-size: 0.8rem;
-            padding: 0.3rem 0.75rem;
-            border-radius: 8px;
-            background: var(--badge-bg);
-            border: 1px solid var(--badge-border);
+        /* Sidebar Stats Strip */
+        .sidebar-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            padding: 1.1rem 0 0;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .sidebar-stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .sidebar-stat-num {
+            font-size: 1.15rem;
+            font-weight: 800;
+            font-family: var(--font-display);
+            color: var(--theme-primary-light);
+        }
+
+        [data-theme="light"] .sidebar-stat-num {
+            color: var(--theme-primary);
+        }
+
+        .sidebar-stat-lbl {
+            font-size: 0.72rem;
             color: var(--text-muted);
             font-weight: 500;
         }
 
-        /* ===== Grid Cards for Hobbies / Talents ===== */
-        .skills-grid {
+        /* Social Direct Card */
+        .sidebar-social-card {
+            background: var(--surface-glass);
+            backdrop-filter: blur(28px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 1.4rem;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-card-top {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .social-ig-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.45rem;
+            box-shadow: 0 6px 16px rgba(220, 39, 67, 0.35);
+        }
+
+        .social-card-texts h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .social-card-texts p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .social-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+
+        .social-btn {
+            padding: 0.65rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+        }
+
+        .social-btn-primary {
+            background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+            color: #fff;
+            border: none;
+            box-shadow: 0 6px 16px rgba(220, 39, 67, 0.3);
+        }
+
+        .social-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 39, 67, 0.45);
+        }
+
+        .social-btn-ghost {
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+        }
+
+        .social-btn-ghost:hover {
+            border-color: var(--theme-primary);
+            color: var(--theme-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Cheer Card */
+        .sidebar-cheer-card {
+            background: linear-gradient(135deg, var(--theme-primary-glow) 0%, transparent 100%), var(--surface-glass);
+            border: 1px dashed var(--theme-primary);
+            border-radius: 24px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .cheer-badge-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--theme-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .cheer-headline {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.9rem;
+        }
+
+        .cheer-btn-interactive {
+            background: var(--theme-btn-gradient);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: var(--font-display);
+            cursor: pointer;
+            box-shadow: 0 8px 22px var(--theme-primary-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            transition: var(--transition-bounce);
+            position: relative;
+        }
+
+        .cheer-btn-interactive:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 12px 28px var(--theme-primary-glow);
+        }
+
+        .cheer-btn-interactive:active {
+            transform: scale(0.96);
+        }
+
+        .cheer-counter-pill {
+            background: rgba(255, 255, 255, 0.28);
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .combo-chip {
+            position: absolute;
+            top: -16px;
+            right: -10px;
+            background: #fbbf24;
+            color: #78350f;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.4);
+            opacity: 0;
+            transform: scale(0.6);
+            transition: var(--transition-bounce);
+            pointer-events: none;
+        }
+
+        .combo-chip.show {
+            opacity: 1;
+            transform: scale(1) translateY(-4px);
+        }
+
+        /* ========================================================
+           RIGHT COLUMN: ASYMMETRICAL BENTO GRID EXPERIENCE
+           ======================================================== */
+        .bento-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+
+        /* Universal Bento Box Container */
+        .bento-box {
+            background: var(--surface-glass-card);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-box:hover {
+            border-color: var(--border-glass-glow);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .bento-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.4rem;
+        }
+
+        .bento-header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            font-family: var(--font-display);
+            color: var(--text-primary);
+        }
+
+        .bento-header-title i {
+            color: var(--theme-primary);
+            font-size: 1.15rem;
+        }
+
+        .bento-header-badge {
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+
+        /* ===== 1. STORY & ABOUT BOX ===== */
+        .quote-narrative-box {
+            position: relative;
+            padding: 1.6rem 2rem 1.6rem 2.2rem;
+            background: linear-gradient(135deg, var(--theme-primary-glow) 0%, transparent 100%);
+            border-left: 4px solid var(--theme-primary);
+            border-radius: 0 20px 20px 0;
+            margin-bottom: 1.4rem;
+        }
+
+        .quote-quote-glyph {
+            position: absolute;
+            top: 0.8rem;
+            right: 1.2rem;
+            font-size: 2.4rem;
+            color: var(--theme-primary);
+            opacity: 0.18;
+        }
+
+        .quote-narrative-text {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--text-primary);
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-narrative-highlight {
+            background: linear-gradient(120deg, var(--theme-primary-glow), var(--theme-secondary-glow));
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--theme-primary-light);
+        }
+
+        [data-theme="light"] .quote-narrative-highlight {
+            color: var(--theme-primary);
+        }
+
+        .bento-mood-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .bento-mood-tag {
+            font-size: 0.82rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 10px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .bento-mood-tag:hover {
+            border-color: var(--theme-primary);
+            color: var(--theme-primary);
+            background: var(--theme-primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* ===== 2. JOURNEY DASHBOARD (2x2 GRID) ===== */
+        .dashboard-bento-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.1rem;
-            margin-bottom: 1.5rem;
         }
 
-        @media (max-width: 520px) {
-            .skills-grid {
+        @media (max-width: 620px) {
+            .dashboard-bento-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--card-border);
+        .dash-tile {
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
             border-radius: 20px;
-            padding: 1.4rem 1.25rem;
+            padding: 1.3rem;
             display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 0.75rem;
             transition: var(--transition-smooth);
         }
 
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--card-hover-border);
-            box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.35);
+        .dash-tile:hover {
+            border-color: var(--border-glass-glow);
+            background: var(--surface-subtle-hover);
+            transform: translateY(-2px);
         }
 
-        .feature-icon-box {
+        .dash-tile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dash-tile-title {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .dash-tile-title i {
+            color: var(--theme-primary);
+        }
+
+        .dash-tile-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            background: var(--theme-primary-glow);
+            color: var(--theme-primary);
+        }
+
+        .dash-progress-track {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        [data-theme="light"] .dash-progress-track {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .dash-progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: var(--theme-gradient);
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .dash-progress-fill::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmerLine 2s infinite;
+        }
+
+        @keyframes shimmerLine {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .dash-tile-desc {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        /* ===== 3. TALENTS & PASSIONS (MOSAIC 4-GRID) ===== */
+        .talents-mosaic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.15rem;
+        }
+
+        @media (max-width: 620px) {
+            .talents-mosaic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .talent-card {
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            border-radius: 22px;
+            padding: 1.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .talent-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--theme-primary);
+            box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.35), 0 0 16px var(--theme-primary-glow);
+        }
+
+        .talent-icon-pill {
             width: 48px;
             height: 48px;
-            border-radius: 14px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -496,277 +1234,540 @@
             transition: var(--transition-bounce);
         }
 
-        .feature-card:hover .feature-icon-box {
-            transform: scale(1.1) rotate(4deg);
+        .talent-card:hover .talent-icon-pill {
+            transform: scale(1.1) rotate(6deg);
         }
 
-        .icon-singing {
-            background: rgba(236, 72, 153, 0.15);
-            color: #ec4899;
-            border: 1px solid rgba(236, 72, 153, 0.3);
+        .t-singing {
+            background: var(--theme-primary-glow);
+            color: var(--theme-primary);
+            border: 1px solid var(--theme-primary);
         }
 
-        .icon-drawing {
-            background: rgba(168, 85, 247, 0.15);
-            color: #a855f7;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+        .t-drawing {
+            background: var(--theme-secondary-glow);
+            color: var(--theme-secondary);
+            border: 1px solid var(--theme-secondary);
         }
 
-        .icon-gaming {
-            background: rgba(56, 189, 248, 0.15);
+        .t-gaming {
+            background: rgba(56, 189, 248, 0.18);
             color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(56, 189, 248, 0.35);
         }
 
-        .icon-friends {
-            background: rgba(251, 146, 60, 0.15);
+        .t-friends {
+            background: rgba(251, 146, 60, 0.18);
             color: #fb923c;
-            border: 1px solid rgba(251, 146, 60, 0.3);
+            border: 1px solid rgba(251, 146, 60, 0.35);
         }
 
-        .feature-details h4 {
-            font-size: 1.02rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
+        .talent-details {
+            flex: 1;
+        }
+
+        .talent-name-row {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
         }
 
-        .feature-type-tag {
+        .talent-name-row h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .talent-badge {
             font-size: 0.7rem;
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
-            background: var(--badge-bg);
+            padding: 0.18rem 0.5rem;
+            border-radius: 6px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
             color: var(--text-muted);
             font-weight: 600;
         }
 
-        .feature-details p {
-            font-size: 0.85rem;
+        .talent-details p {
+            font-size: 0.86rem;
             color: var(--text-secondary);
-            line-height: 1.45;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
         }
 
-        /* ===== Instagram Featured Banner ===== */
-        .instagram-card {
-            background: linear-gradient(135deg, rgba(240, 148, 51, 0.1) 0%, rgba(220, 39, 67, 0.12) 50%, rgba(188, 24, 136, 0.1) 100%), var(--card-bg);
-            border: 1px solid rgba(220, 39, 67, 0.3);
-            border-radius: 24px;
-            padding: 1.8rem;
+        .talent-tag-hint {
+            font-size: 0.74rem;
+            color: var(--theme-primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ===== 4. MINI VINYL MUSIC PLAYER ===== */
+        .music-bento-strip {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1.2rem;
-            margin-bottom: 1.8rem;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, var(--theme-primary-glow) 0%, var(--theme-secondary-glow) 100%), var(--surface-glass-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 1.6rem 2rem;
             transition: var(--transition-smooth);
+        }
+
+        .music-bento-strip:hover {
+            border-color: var(--theme-primary);
+            box-shadow: 0 16px 36px var(--theme-primary-glow);
+        }
+
+        @media (max-width: 640px) {
+            .music-bento-strip {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .music-vinyl-unit {
             position: relative;
-            overflow: hidden;
+            width: 78px;
+            height: 78px;
+            flex-shrink: 0;
         }
 
-        .instagram-card::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(220, 39, 67, 0.15) 0%, transparent 70%);
+        .vinyl-round-lp {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .instagram-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(220, 39, 67, 0.6);
-            box-shadow: 0 16px 35px -10px rgba(220, 39, 67, 0.25);
-        }
-
-        .ig-profile-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .ig-icon-badge {
-            width: 54px;
-            height: 54px;
-            border-radius: 16px;
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            background: radial-gradient(circle, #2d3748 15%, #1a202c 16%, #1a202c 40%, #0f172a 75%, #020617 100%);
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 18px rgba(220, 39, 67, 0.35);
+            position: relative;
+            transition: transform 0.3s ease;
         }
 
-        .ig-text-box h3 {
-            font-size: 1.15rem;
+        .vinyl-round-lp.playing {
+            animation: spinVinyl 6s linear infinite;
+        }
+
+        @keyframes spinVinyl {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .vinyl-center-art {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+
+        .vinyl-center-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .music-strip-info {
+            flex: 1;
+        }
+
+        .music-status-pill {
+            font-size: 0.72rem;
             font-weight: 700;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+            background: var(--theme-primary-glow);
+            color: var(--theme-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .music-song-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            font-family: var(--font-display);
             color: var(--text-primary);
             margin-bottom: 0.15rem;
         }
 
-        .ig-text-box p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .ig-btn {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.8rem 1.5rem;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition-bounce);
-            box-shadow: 0 8px 20px rgba(220, 39, 67, 0.3);
-        }
-
-        .ig-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 12px 28px rgba(220, 39, 67, 0.45);
-            color: #ffffff;
-        }
-
-        /* ===== Cheer / Love Interactive Section ===== */
-        .cheer-box {
-            text-align: center;
-            background: var(--card-bg);
-            border: 1px dashed var(--card-border);
-            border-radius: 24px;
-            padding: 2.2rem 1.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .cheer-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.4rem;
-        }
-
-        .cheer-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        .cheer-btn {
-            position: relative;
-            background: linear-gradient(135deg, #ec4899, #f43f5e);
-            color: #ffffff;
-            border: none;
-            padding: 0.9rem 2.2rem;
-            border-radius: 999px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            font-family: inherit;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.35);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            transition: var(--transition-bounce);
-            overflow: visible;
-        }
-
-        .cheer-btn:hover {
-            transform: scale(1.06) translateY(-2px);
-            box-shadow: 0 14px 30px rgba(236, 72, 153, 0.5);
-        }
-
-        .cheer-btn:active {
-            transform: scale(0.96);
-        }
-
-        .heart-count-badge {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(5px);
-            padding: 0.15rem 0.6rem;
-            border-radius: 999px;
+        .music-song-sub {
             font-size: 0.85rem;
-            font-weight: 800;
+            color: var(--text-secondary);
+            margin-bottom: 0.6rem;
         }
 
-        /* Floating Hearts Particles */
+        /* Equalizer Bars */
+        .music-equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .music-equalizer {
+                justify-content: center;
+            }
+        }
+
+        .eq-stick {
+            width: 3.5px;
+            background: var(--theme-primary);
+            border-radius: 999px;
+            height: 4px;
+            transition: height 0.2s ease;
+        }
+
+        .music-equalizer.playing .eq-stick:nth-child(1) {
+            animation: eqBounce 0.8s ease-in-out infinite alternate;
+        }
+
+        .music-equalizer.playing .eq-stick:nth-child(2) {
+            animation: eqBounce 0.6s ease-in-out 0.2s infinite alternate;
+        }
+
+        .music-equalizer.playing .eq-stick:nth-child(3) {
+            animation: eqBounce 1s ease-in-out 0.4s infinite alternate;
+        }
+
+        .music-equalizer.playing .eq-stick:nth-child(4) {
+            animation: eqBounce 0.7s ease-in-out 0.1s infinite alternate;
+        }
+
+        .music-equalizer.playing .eq-stick:nth-child(5) {
+            animation: eqBounce 0.9s ease-in-out 0.3s infinite alternate;
+        }
+
+        @keyframes eqBounce {
+            0% {
+                height: 4px;
+            }
+
+            100% {
+                height: 16px;
+            }
+        }
+
+        .music-play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--theme-btn-gradient);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 8px 20px var(--theme-primary-glow);
+            transition: var(--transition-bounce);
+        }
+
+        .music-play-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 12px 26px var(--theme-primary-glow);
+        }
+
+        /* ===== 5. POLAROID MOMENTS GALLERY ===== */
+        .polaroids-strip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.15rem;
+        }
+
+        @media (max-width: 640px) {
+            .polaroids-strip-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+
+        .polaroid-item {
+            background: #ffffff;
+            color: #1e293b;
+            padding: 10px 10px 16px;
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+            transition: var(--transition-bounce);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .polaroid-item:nth-child(1) {
+            transform: rotate(-2deg);
+        }
+
+        .polaroid-item:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid-item:nth-child(3) {
+            transform: rotate(-1.5deg);
+        }
+
+        .polaroid-item:hover {
+            transform: rotate(0deg) scale(1.06) translateY(-6px);
+            z-index: 10;
+            box-shadow: 0 20px 42px rgba(0, 0, 0, 0.35);
+        }
+
+        .polaroid-washi-tape {
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 16px;
+            background: var(--theme-primary-glow);
+            backdrop-filter: blur(4px);
+            border-radius: 2px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .polaroid-photo-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #f1f5f9;
+            margin-bottom: 8px;
+        }
+
+        .polaroid-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .polaroid-item:hover .polaroid-photo-frame img {
+            transform: scale(1.08);
+        }
+
+        .polaroid-title-caption {
+            font-size: 0.84rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1e293b;
+            font-family: var(--font-display);
+        }
+
+        .polaroid-desc-sub {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* ===== 6. WISHES WALL BENTO BOARD ===== */
+        .wishes-bento-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .btn-add-wish-floating {
+            background: var(--theme-btn-gradient);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 999px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            box-shadow: 0 6px 16px var(--theme-primary-glow);
+            transition: var(--transition-bounce);
+        }
+
+        .btn-add-wish-floating:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 10px 22px var(--theme-primary-glow);
+        }
+
+        .wishes-pin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.1rem;
+        }
+
+        @media (max-width: 640px) {
+            .wishes-pin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wish-sticky-note {
+            border-radius: 18px;
+            padding: 1.25rem 1.4rem;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .wish-sticky-note:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .sticky-blue {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.16), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(14, 165, 233, 0.35);
+        }
+
+        .sticky-mint {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(5, 150, 105, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+
+        .sticky-purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.35);
+        }
+
+        .sticky-amber {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.16), rgba(245, 158, 11, 0.1));
+            border: 1px solid rgba(251, 191, 36, 0.35);
+        }
+
+        .sticky-pin-icon {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .sticky-msg-text {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .sticky-footer-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-top: 0.5rem;
+        }
+
+        [data-theme="light"] .sticky-footer-meta {
+            border-top-color: rgba(0, 0, 0, 0.12);
+        }
+
+        .sticky-author-name {
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================================
+           FLOATING ELEMENTS & PARTICLES
+           ======================================================== */
         .floating-heart {
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            font-size: 1.8rem;
-            animation: floatUp 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            font-size: 1.9rem;
+            animation: floatUpBurst 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
         }
 
-        @keyframes floatUp {
+        @keyframes floatUpBurst {
             0% {
                 opacity: 1;
-                transform: translate(0, 0) scale(0.6) rotate(0deg);
+                transform: translate(0, 0) scale(0.5) rotate(0deg);
             }
 
             50% {
-                opacity: 0.9;
-                transform: translate(var(--dx), -80px) scale(1.2) rotate(var(--rot));
+                opacity: 0.95;
+                transform: translate(var(--dx), -90px) scale(1.25) rotate(var(--rot));
             }
 
             100% {
                 opacity: 0;
-                transform: translate(var(--dx2), -180px) scale(0.9) rotate(calc(var(--rot) * 2));
+                transform: translate(var(--dx2), -200px) scale(0.85) rotate(calc(var(--rot) * 2));
             }
         }
 
-        /* ===== Footer ===== */
-        .footer {
-            text-align: center;
-            padding-top: 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--card-border);
+        /* Back to top floating button */
+        .btn-back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface-glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-bounce);
+            z-index: 90;
         }
 
-        .footer p {
-            margin-bottom: 0.4rem;
+        .btn-back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
-        .footer-heart {
-            color: #ec4899;
-            display: inline-block;
-            animation: beat 1.5s infinite;
+        .btn-back-to-top:hover {
+            transform: translateY(-4px) scale(1.08);
+            border-color: var(--theme-primary);
+            color: var(--theme-primary);
         }
 
-        @keyframes beat {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        /* ===== Lightbox Modal ===== */
+        /* ========================================================
+           LIGHTBOX & WISH MODALS
+           ======================================================== */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(14px);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.35s ease;
             padding: 1.5rem;
         }
 
@@ -775,282 +1776,982 @@
             pointer-events: auto;
         }
 
-        .modal-content {
+        .modal-content-shell {
             position: relative;
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
             text-align: center;
             transform: scale(0.92);
             transition: var(--transition-bounce);
         }
 
-        .modal-overlay.active .modal-content {
+        .modal-overlay.active .modal-content-shell {
             transform: scale(1);
         }
 
-        .modal-img {
+        .modal-img-display {
             width: 100%;
-            max-height: 75vh;
+            max-height: 78vh;
             object-fit: contain;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            border-radius: 22px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
             border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .modal-close-btn {
+        .modal-img-caption {
+            margin-top: 1rem;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .modal-dismiss-btn {
             position: absolute;
             top: -16px;
             right: -16px;
             background: #ffffff;
             color: #0f172a;
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition-smooth);
+            z-index: 10;
         }
 
-        .modal-close-btn:hover {
+        .modal-dismiss-btn:hover {
             transform: scale(1.1) rotate(90deg);
+            background: var(--theme-primary);
+            color: #fff;
         }
 
-        /* ===== Toast Notification ===== */
-        .toast {
+        /* Wish Submission Modal */
+        .wish-modal-card {
+            background: var(--modal-bg);
+            backdrop-filter: blur(28px);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            text-align: left;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .wish-modal-title {
+            font-size: 1.25rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .wish-modal-sub {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.4rem;
+        }
+
+        .form-group-unit {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-label-txt {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input-ctrl,
+        .form-textarea-ctrl {
+            width: 100%;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.92rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-input-ctrl:focus,
+        .form-textarea-ctrl:focus {
+            border-color: var(--theme-primary);
+            box-shadow: 0 0 0 3px var(--theme-primary-glow);
+        }
+
+        .form-textarea-ctrl {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .preset-pills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 0.5rem;
+        }
+
+        .preset-pill-item {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .preset-pill-item:hover {
+            border-color: var(--theme-primary);
+            color: var(--theme-primary);
+        }
+
+        .stickers-selector-row {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sticker-pick-item {
+            font-size: 1.4rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 12px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+        }
+
+        .sticker-pick-item.active,
+        .sticker-pick-item:hover {
+            transform: scale(1.15);
+            border-color: var(--theme-primary);
+            background: var(--theme-primary-glow);
+        }
+
+        .modal-action-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-modal-cancel {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 0.65rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-modal-cancel:hover {
+            color: var(--text-primary);
+            border-color: var(--text-secondary);
+        }
+
+        .btn-modal-submit {
+            background: var(--theme-btn-gradient);
+            color: #fff;
+            border: none;
+            padding: 0.65rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 16px var(--theme-primary-glow);
+            transition: var(--transition-bounce);
+        }
+
+        .btn-modal-submit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 22px var(--theme-primary-glow);
+        }
+
+        /* Toast Feedback */
+        .toast-banner {
             position: fixed;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(14px);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.75rem 1.4rem;
+            padding: 0.8rem 1.6rem;
             border-radius: 999px;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            gap: 0.6rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
             z-index: 2000;
             opacity: 0;
             pointer-events: none;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .toast.show {
+        .toast-banner.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
 
-        .toast i {
+        .toast-banner i {
             color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            padding: 2.5rem 0 1rem;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            border-top: 1px solid var(--border-glass);
+            margin-top: 2rem;
+        }
+
+        .footer-note p {
+            margin-bottom: 0.35rem;
+        }
+
+        .footer-heart-symbol {
+            color: var(--theme-primary);
+            display: inline-block;
+            animation: beatHeart 1.5s infinite;
+        }
+
+        @keyframes beatHeart {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.25);
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Dynamic Stardust Canvas -->
+    <canvas id="heartCanvas"></canvas>
+
     <!-- Ambient Glowing Orbs -->
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
 
-    <!-- Top Navigation Bar -->
-    <header class="navbar">
-        <a href="#" class="nav-brand">
-            <img src="meinv.jpeg" alt="Mia" class="brand-avatar">
-            <span>Mia's Space</span>
-        </a>
-        <div class="nav-actions">
-            <button class="icon-btn" id="shareBtn" title="分享名片" aria-label="分享名片">
-                <i class="fa-solid fa-share-nodes"></i>
-            </button>
-            <button class="icon-btn" id="themeToggle" title="切換色彩模式" aria-label="切換外觀主題">
-                <i class="fa-solid fa-moon" id="themeIcon"></i>
-            </button>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-
-        <!-- Hero Profile Card -->
-        <section class="hero-card">
-            <!-- Avatar with Lightbox Trigger -->
-            <div class="avatar-container" id="avatarTrigger" title="點擊檢視高畫質照片">
-                <div class="avatar-glow"></div>
-                <img src="meinv.jpeg" alt="湯雅心" class="avatar-img" id="heroPhoto">
-            </div>
-
-            <!-- Status Pill -->
-            <div>
-                <span class="badge-status">
-                    <i class="fa-solid fa-sparkles"></i> 樂觀熱情・用心生活
-                </span>
-            </div>
-
-            <!-- Name & Subtitle -->
-            <h1 class="hero-name">湯雅心</h1>
-            <p class="hero-subtitle">
-                <span>Mia</span>
-                <span class="subtitle-dot">●</span>
-                <span>勇敢逐夢的樂天女孩</span>
-            </p>
-
-            <!-- Quick Info Badges -->
-            <div class="tag-group">
-                <div class="info-pill aries">
-                    <i class="fa-solid fa-fire"></i>
-                    <span>牡羊座 (Aries)</span>
+    <!-- Floating Top Navigation Pill -->
+    <div class="navbar-wrap">
+        <header class="navbar">
+            <a href="#" class="nav-brand" aria-label="回到頁面頂部">
+                <img src="meinv.jpeg" alt="Mia" class="brand-avatar">
+                <div class="brand-text-wrap">
+                    <span class="brand-name">湯雅心 Mia <span style="font-size:0.85em; font-weight:700; opacity:0.85;">(漢堡
+                            🍔)</span></span>
+                    <span class="brand-tag">Personal Studio Space</span>
                 </div>
-                <div class="info-pill school">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    <span>台南應用科技大學</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <div class="section-header">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <span>關於我・About Me</span>
-        </div>
-        <section class="card">
-            <div class="quote-box">
-                <p class="quote-text">
-                    「我是一名<span
-                        class="highlight-quote">脊髓肌肉萎縮</span>的患者，但我生性樂觀，待人隨和好相處，喜歡結交朋友！平常沒事喜歡唱歌跟打遊戲，最近的心思都在談戀愛跟小專上，希望能好好度過這段期間。✨」
-                </p>
-            </div>
-            <div class="mood-tags">
-                <span class="mood-tag"># 生命勇者</span>
-                <span class="mood-tag"># 生性樂觀隨和</span>
-                <span class="mood-tag"># 喜歡交朋友</span>
-                <span class="mood-tag"># 小專衝刺中</span>
-                <span class="mood-tag"># 戀愛ING 💕</span>
-            </div>
-        </section>
-
-        <!-- Interests & Talents Section -->
-        <div class="section-header">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>專長與興趣・Passions & Talents</span>
-        </div>
-        <div class="skills-grid">
-            <!-- 唱歌 -->
-            <div class="feature-card">
-                <div class="feature-icon-box icon-singing">
-                    <i class="fa-solid fa-microphone-lines"></i>
-                </div>
-                <div class="feature-details">
-                    <h4>唱歌 <span class="feature-type-tag">專長 & 興趣</span></h4>
-                    <p>平常最喜歡放鬆歌唱，用旋律傳遞心情與溫暖，是生活中不可或缺的快樂。</p>
-                </div>
-            </div>
-
-            <!-- 繪畫 -->
-            <div class="feature-card">
-                <div class="feature-icon-box icon-drawing">
-                    <i class="fa-solid fa-palette"></i>
-                </div>
-                <div class="feature-details">
-                    <h4>繪畫 <span class="feature-type-tag">個人專長</span></h4>
-                    <p>發揮天馬行空的想像力，將心中的色彩描繪成美麗的畫面。</p>
-                </div>
-            </div>
-
-            <!-- 電動 -->
-            <div class="feature-card">
-                <div class="feature-icon-box icon-gaming">
-                    <i class="fa-solid fa-gamepad"></i>
-                </div>
-                <div class="feature-details">
-                    <h4>打遊戲 <span class="feature-type-tag">休閒愛好</span></h4>
-                    <p>閒暇時沉浸在遊戲世界中探險挑戰，享受闖關與互動的滿滿樂趣。</p>
-                </div>
-            </div>
-
-            <!-- 待人相處 -->
-            <div class="feature-card">
-                <div class="feature-icon-box icon-friends">
-                    <i class="fa-solid fa-user-group"></i>
-                </div>
-                <div class="feature-details">
-                    <h4>隨和交友 <span class="feature-type-tag">個人特質</span></h4>
-                    <p>待人親切好相處，熱情真誠，珍惜身邊每位相遇與陪伴的朋友！</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instagram Connection Card -->
-        <div class="section-header">
-            <i class="fa-brands fa-instagram"></i>
-            <span>社群追蹤・Connect</span>
-        </div>
-        <div class="instagram-card">
-            <div class="ig-profile-info">
-                <div class="ig-icon-badge">
-                    <i class="fa-brands fa-instagram"></i>
-                </div>
-                <div class="ig-text-box">
-                    <h3>Instagram</h3>
-                    <p>@mia._.gashin ・ 追蹤我的精彩生活動態</p>
-                </div>
-            </div>
-            <a href="https://www.instagram.com/mia._.gashin/" target="_blank" rel="noopener noreferrer" class="ig-btn">
-                <span>前往追蹤</span>
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
-        </div>
+            <div class="nav-actions">
+                <!-- Theme Palette Selector -->
+                <button class="icon-btn" id="paletteBtn" title="更換色彩風格" aria-label="切換主題色">
+                    <i class="fa-solid fa-palette"></i>
+                </button>
+                <div class="palette-dropdown" id="paletteDropdown">
+                    <div class="palette-dropdown-title">
+                        <i class="fa-solid fa-swatchbook"></i> 選擇調色盤風格
+                    </div>
+                    <div class="palette-grid">
+                        <button class="palette-pill active" data-color="ocean">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #0284c7, #06b6d4);"></span>
+                            <span>蔚藍海風</span>
+                        </button>
+                        <button class="palette-pill" data-color="mint">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #059669, #10b981);"></span>
+                            <span>晨曦薄荷</span>
+                        </button>
+                        <button class="palette-pill" data-color="sunset">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #ea580c, #f43f5e);"></span>
+                            <span>落日暖陽</span>
+                        </button>
+                        <button class="palette-pill" data-color="lavender">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #7c3aed, #4f46e5);"></span>
+                            <span>星河幻紫</span>
+                        </button>
+                        <button class="palette-pill" data-color="sakura">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #db2777, #e11d48);"></span>
+                            <span>浪漫櫻粉</span>
+                        </button>
+                        <button class="palette-pill" data-color="gold">
+                            <span class="palette-dot"
+                                style="background: linear-gradient(135deg, #d97706, #fbbf24);"></span>
+                            <span>黑金輕奢</span>
+                        </button>
+                    </div>
+                </div>
 
-        <!-- Interactive Cheer & Heart Section -->
-        <section class="cheer-box">
-            <h3 class="cheer-title">為雅心送上滿滿的祝福與鼓勵 ✨</h3>
-            <p class="cheer-desc">點擊下方按鈕，送出愛心，一起為雅心的小專與生活加油打氣！</p>
-            <button class="cheer-btn" id="cheerBtn" aria-label="點擊送出愛心">
-                <i class="fa-solid fa-heart"></i>
-                <span>送出愛心</span>
-                <span class="heart-count-badge" id="heartCounter">520</span>
-            </button>
-        </section>
+                <!-- Music Player Switch -->
+                <button class="icon-btn" id="musicToggleBtn" title="播放微光點唱機" aria-label="音樂開關">
+                    <i class="fa-solid fa-music"></i>
+                </button>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Made with <span class="footer-heart">❤</span> for 湯雅心 Mia</p>
-            <p>珍惜當下，微笑面對每個精彩明天 🌈</p>
-        </footer>
+                <!-- Share Card -->
+                <button class="icon-btn" id="shareBtn" title="分享個人名片" aria-label="分享名片">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
 
-    </main>
+                <!-- Light / Dark Mode Toggle -->
+                <button class="icon-btn" id="themeToggle" title="切換明暗模式" aria-label="切換深淺模式">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+            <div class="scroll-progress-line" id="scrollProgressLine"></div>
+        </header>
+    </div>
+
+    <!-- Main Asymmetrical Studio Layout -->
+    <div class="main-wrapper">
+
+        <!-- ================= LEFT COLUMN: STICKY HERO PROFILE ================= -->
+        <aside class="sidebar-sticky">
+
+            <!-- Hero Avatar & Identity Deck -->
+            <div class="hero-profile-card">
+                <div class="avatar-box" id="avatarTrigger" title="點擊檢視相片大圖">
+                    <div class="avatar-glow-ring"></div>
+                    <div class="avatar-frame">
+                        <img src="meinv.jpeg" alt="湯雅心 Mia" class="avatar-img">
+                    </div>
+                    <span class="avatar-badge-tip">
+                        <i class="fa-solid fa-expand"></i> 檢視大圖
+                    </span>
+                </div>
+
+                <div>
+                    <span class="status-chip">
+                        <span class="status-dot-pulse"></span> 樂觀隨和・戀愛 & 小專中 💕
+                    </span>
+                </div>
+
+                <h1 class="hero-title-name">湯雅心</h1>
+                <p class="hero-bio-subtitle">Mia ● 綽號「漢堡 🍔」● 勇敢逐夢的樂天女孩</p>
+
+                <div class="identity-pills-list">
+                    <span class="id-pill" title="可愛綽號"
+                        style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.1); color: var(--text-primary);">
+                        <i class="fa-solid fa-burger" style="color: #f59e0b;"></i> 綽號：漢堡 🍔
+                    </span>
+                    <span class="id-pill" title="牡羊座 03/21 - 04/19">
+                        <i class="fa-solid fa-fire"></i> 牡羊座 (Aries)
+                    </span>
+                    <span class="id-pill" title="就讀學校">
+                        <i class="fa-solid fa-graduation-cap"></i> 台南應用科技大學
+                    </span>
+                    <span class="id-pill" title="生活所在地">
+                        <i class="fa-solid fa-location-dot"></i> 台灣・台南
+                    </span>
+                </div>
+
+                <div class="sidebar-stats-row">
+                    <div class="sidebar-stat-item">
+                        <span class="sidebar-stat-num" id="statLikes">520+</span>
+                        <span class="sidebar-stat-lbl">愛心集氣</span>
+                    </div>
+                    <div class="sidebar-stat-item">
+                        <span class="sidebar-stat-num">歌唱&繪畫</span>
+                        <span class="sidebar-stat-lbl">專長才華</span>
+                    </div>
+                    <div class="sidebar-stat-item">
+                        <span class="sidebar-stat-num">100%</span>
+                        <span class="sidebar-stat-lbl">心動幸福</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram Social Connect Card -->
+            <div class="sidebar-social-card">
+                <div class="social-card-top">
+                    <div class="social-ig-icon">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="social-card-texts">
+                        <h4>Instagram</h4>
+                        <p>@mia._.gashin ・ 追蹤日常動態</p>
+                    </div>
+                </div>
+                <div class="social-buttons-grid">
+                    <button class="social-btn social-btn-ghost" id="copyIgBtn">
+                        <i class="fa-regular fa-copy"></i> 複製帳號
+                    </button>
+                    <a href="https://www.instagram.com/mia._.gashin/" target="_blank" rel="noopener noreferrer"
+                        class="social-btn social-btn-primary">
+                        前往追蹤 <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Cheer / Love Support Card -->
+            <div class="sidebar-cheer-card">
+                <div class="cheer-badge-label">Send Warmth & Love</div>
+                <div class="cheer-headline">為雅心送上溫暖愛心 ✨</div>
+                <button class="cheer-btn-interactive" id="cheerBtn" aria-label="點擊送出愛心">
+                    <i class="fa-solid fa-heart" style="color: #f43f5e;"></i>
+                    <span>送出愛心</span>
+                    <span class="cheer-counter-pill" id="heartCounter">520</span>
+                    <div class="combo-chip" id="comboBadge">Combo x1 🔥</div>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- ================= RIGHT COLUMN: RICH BENTO EXPERIENCE ================= -->
+        <main class="bento-feed">
+
+            <!-- 1. STORY & ABOUT ME BENTO BOX -->
+            <section class="bento-box">
+                <div class="bento-header-row">
+                    <div class="bento-header-title">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                        <span>關於我・About Mia</span>
+                    </div>
+                    <span class="bento-header-badge">生命勇者獨白</span>
+                </div>
+                <div class="quote-narrative-box">
+                    <i class="fa-solid fa-quote-right quote-quote-glyph"></i>
+                    <p class="quote-narrative-text">
+                        「大家也可以叫我<span class="quote-narrative-highlight">漢堡
+                            🍔</span>！我是一名脊髓肌肉萎縮的患者，但我生性樂觀，待人隨和好相處，喜歡結交朋友！平常沒事喜歡唱歌跟打遊戲，最近的心思都在談戀愛跟小專上，希望能好好度過這段期間。✨」
+                    </p>
+                </div>
+                <div class="bento-mood-tags">
+                    <span class="bento-mood-tag" style="border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;"># 綽號漢堡
+                        🍔</span>
+                    <span class="bento-mood-tag"># 生命勇者 🌟</span>
+                    <span class="bento-mood-tag"># 生性樂觀隨和 🌸</span>
+                    <span class="bento-mood-tag"># 喜歡交朋友 🤝</span>
+                    <span class="bento-mood-tag"># 小專衝刺中 🎓</span>
+                    <span class="bento-mood-tag"># 戀愛ING 💕</span>
+                    <span class="bento-mood-tag"># 溫暖向陽 🌻</span>
+                </div>
+            </section>
+
+            <!-- 2. JOURNEY & MOOD DASHBOARD -->
+            <section class="bento-box">
+                <div class="bento-header-row">
+                    <div class="bento-header-title">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                        <span>生活動態・Journey & Vibes</span>
+                    </div>
+                    <span class="bento-header-badge">即時記錄</span>
+                </div>
+                <div class="dashboard-bento-grid">
+                    <!-- 畢業小專衝刺 -->
+                    <div class="dash-tile">
+                        <div class="dash-tile-header">
+                            <span class="dash-tile-title">
+                                <i class="fa-solid fa-rocket"></i> 畢業小專衝刺
+                            </span>
+                            <span class="dash-tile-tag">85% 超前中</span>
+                        </div>
+                        <div class="dash-progress-track">
+                            <div class="dash-progress-fill" style="width: 85%;"></div>
+                        </div>
+                        <p class="dash-tile-desc">認真打磨作品設計，全力以赴衝刺畢業專題！💪</p>
+                    </div>
+
+                    <!-- 戀愛心動指數 -->
+                    <div class="dash-tile">
+                        <div class="dash-tile-header">
+                            <span class="dash-tile-title">
+                                <i class="fa-solid fa-heart-pulse"></i> 戀愛心動指數
+                            </span>
+                            <span class="dash-tile-tag">滿分甜蜜 💕</span>
+                        </div>
+                        <div class="dash-progress-track">
+                            <div class="dash-progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <p class="dash-tile-desc">最近心思都在甜蜜談戀愛中，天天都超級幸福～🥰</p>
+                    </div>
+
+                    <!-- 今日心情晴雨表 -->
+                    <div class="dash-tile">
+                        <div class="dash-tile-header">
+                            <span class="dash-tile-title">
+                                <i class="fa-solid fa-sun"></i> 今日心情晴雨表
+                            </span>
+                            <span class="dash-tile-tag"
+                                style="background: rgba(251, 191, 36, 0.15); color: #fbbf24;">晴空萬里 ☀️</span>
+                        </div>
+                        <p class="dash-tile-desc">生性樂觀隨和，用溫暖的微笑迎接身邊的每一個美好瞬間！</p>
+                    </div>
+
+                    <!-- 休閒遊戲推薦 -->
+                    <div class="dash-tile">
+                        <div class="dash-tile-header">
+                            <span class="dash-tile-title">
+                                <i class="fa-solid fa-gamepad"></i> 休閒遊戲愛好
+                            </span>
+                            <span class="dash-tile-tag">連線同樂 🎮</span>
+                        </div>
+                        <p class="dash-tile-desc">閒暇最愛多人連線冒險與派對闖關，歡迎朋友們一起同樂！</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. PASSIONS & TALENTS (MOSAIC 4-GRID) -->
+            <section class="bento-box">
+                <div class="bento-header-row">
+                    <div class="bento-header-title">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>專長與興趣・Passions & Talents</span>
+                    </div>
+                    <span class="bento-header-badge">才華閃光點</span>
+                </div>
+                <div class="talents-mosaic-grid">
+                    <!-- 唱歌 -->
+                    <div class="talent-card">
+                        <div class="talent-icon-pill t-singing">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                        <div class="talent-details">
+                            <div class="talent-name-row">
+                                <h4>唱歌</h4>
+                                <span class="talent-badge">專長 & 興趣</span>
+                            </div>
+                            <p>平常最喜歡放鬆歌唱，用溫柔旋律傳遞心情與力量，是生活中最治癒的解藥。</p>
+                            <span class="talent-tag-hint">
+                                <i class="fa-solid fa-headphones"></i> 流行抒情・暖心小調
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 繪畫 -->
+                    <div class="talent-card">
+                        <div class="talent-icon-pill t-drawing">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div class="talent-details">
+                            <div class="talent-name-row">
+                                <h4>繪畫</h4>
+                                <span class="talent-badge">個人專長</span>
+                            </div>
+                            <p>發揮天馬行空的想像力，將心中的色彩描繪成美麗的畫面，記錄生活美好。</p>
+                            <span class="talent-tag-hint" style="color: var(--theme-secondary);">
+                                <i class="fa-solid fa-paintbrush"></i> 創意手繪・視覺插畫
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 打遊戲 -->
+                    <div class="talent-card">
+                        <div class="talent-icon-pill t-gaming">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <div class="talent-details">
+                            <div class="talent-name-row">
+                                <h4>打遊戲</h4>
+                                <span class="talent-badge">休閒愛好</span>
+                            </div>
+                            <p>閒暇時沉浸在遊戲世界中探險挑戰，享受打怪闖關與好友連線的滿滿樂趣。</p>
+                            <span class="talent-tag-hint" style="color: #38bdf8;">
+                                <i class="fa-solid fa-vr-cardboard"></i> 冒險合作・歡樂派對
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 隨和交友 -->
+                    <div class="talent-card">
+                        <div class="talent-icon-pill t-friends">
+                            <i class="fa-solid fa-user-group"></i>
+                        </div>
+                        <div class="talent-details">
+                            <div class="talent-name-row">
+                                <h4>隨和交友</h4>
+                                <span class="talent-badge">個人特質</span>
+                            </div>
+                            <p>牡羊座的率真與善良，待人親切好相處、熱情真誠，珍惜每段溫暖相遇！</p>
+                            <span class="talent-tag-hint" style="color: #fb923c;">
+                                <i class="fa-solid fa-hand-holding-heart"></i> 真誠隨和・溫暖陪伴
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. MINI VINYL MUSIC PLAYER WIDGET -->
+            <div class="music-bento-strip">
+                <div class="music-vinyl-unit">
+                    <div class="vinyl-round-lp" id="vinylDisc">
+                        <div class="vinyl-center-art">
+                            <img src="meinv.jpeg" alt="Mia Album Cover">
+                        </div>
+                    </div>
+                </div>
+                <div class="music-strip-info">
+                    <span class="music-status-pill" id="musicStatusBadge">
+                        <i class="fa-solid fa-compact-disc"></i> 點擊播放暖心旋律
+                    </span>
+                    <h3 class="music-song-name">甜甜的微風・Mia 隨心哼唱</h3>
+                    <p class="music-song-sub">Acoustic Chillout・Web Audio 療癒音樂盒 ☕</p>
+                    <div class="music-equalizer" id="equalizerBox">
+                        <div class="eq-stick"></div>
+                        <div class="eq-stick"></div>
+                        <div class="eq-stick"></div>
+                        <div class="eq-stick"></div>
+                        <div class="eq-stick"></div>
+                    </div>
+                </div>
+                <div>
+                    <button class="music-play-btn" id="playBtn" aria-label="播放音樂">
+                        <i class="fa-solid fa-play" id="playIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. POLAROID MOMENTS GALLERY -->
+            <section class="bento-box">
+                <div class="bento-header-row">
+                    <div class="bento-header-title">
+                        <i class="fa-solid fa-camera-retro"></i>
+                        <span>生活寫真日常・Moments Gallery</span>
+                    </div>
+                    <span class="bento-header-badge">點擊相片放大</span>
+                </div>
+                <div class="polaroids-strip-grid">
+                    <!-- Polaroid 1 -->
+                    <div class="polaroid-item gallery-trigger" data-title="陽光甜美笑容 ☀️" data-sub="用最燦爛的笑容面對生活">
+                        <div class="polaroid-washi-tape"></div>
+                        <div class="polaroid-photo-frame">
+                            <img src="meinv.jpeg" alt="Mia 陽光笑容" style="object-position: center 20%;">
+                        </div>
+                        <p class="polaroid-title-caption">陽光笑容 ☀️</p>
+                        <p class="polaroid-desc-sub">珍貴美好瞬間</p>
+                    </div>
+
+                    <!-- Polaroid 2 -->
+                    <div class="polaroid-item gallery-trigger" data-title="微風拂面・幸福女孩 🌸" data-sub="每一天都值得被熱愛">
+                        <div class="polaroid-washi-tape"></div>
+                        <div class="polaroid-photo-frame">
+                            <img src="meinv.jpeg" alt="Mia 幸福瞬間" style="object-position: center 30%;">
+                        </div>
+                        <p class="polaroid-title-caption">幸福女孩 🌸</p>
+                        <p class="polaroid-desc-sub">用心感受日常</p>
+                    </div>
+
+                    <!-- Polaroid 3 -->
+                    <div class="polaroid-item gallery-trigger" data-title="專注創作・美好夢想 🎨" data-sub="心中的色彩與小專衝刺">
+                        <div class="polaroid-washi-tape"></div>
+                        <div class="polaroid-photo-frame">
+                            <img src="meinv.jpeg" alt="Mia 專注夢想" style="object-position: center 40%;">
+                        </div>
+                        <p class="polaroid-title-caption">逐夢女孩 ✨</p>
+                        <p class="polaroid-desc-sub">無畏前行，閃閃發光</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. WISHES WALL BENTO BOARD -->
+            <section class="bento-box">
+                <div class="wishes-bento-header">
+                    <div class="bento-header-title">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        <span>溫暖祝福便簽牆・Wish Wall</span>
+                    </div>
+                    <button class="btn-add-wish-floating" id="openWishModalBtn">
+                        <i class="fa-solid fa-pen-fancy"></i>
+                        <span>留下祝福</span>
+                    </button>
+                </div>
+                <div class="wishes-pin-grid" id="wishesGrid">
+                    <!-- Dynamic wishes rendered here -->
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer-note">
+                <p>Designed with <span class="footer-heart-symbol">❤</span> for 湯雅心 Mia</p>
+                <p>珍惜當下，微笑面對每個精彩明天 🌈</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Back to Top Floating Button -->
+    <button class="btn-back-to-top" id="backToTopBtn" title="回到頂部" aria-label="回到頂部">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
     <!-- Photo Lightbox Modal -->
     <div class="modal-overlay" id="photoModal" role="dialog" aria-modal="true" aria-label="相片預覽">
-        <div class="modal-content">
-            <button class="modal-close-btn" id="closeModalBtn" aria-label="關閉預覽">
+        <div class="modal-content-shell">
+            <button class="modal-dismiss-btn" id="closeModalBtn" aria-label="關閉預覽">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <img src="meinv.jpeg" alt="湯雅心 Mia 高畫質照片" class="modal-img">
+            <img src="meinv.jpeg" alt="湯雅心 Mia 高畫質照片" class="modal-img-display" id="lightboxImg">
+            <p class="modal-img-caption" id="lightboxCaption">湯雅心 Mia ✨ 珍惜生活，勇敢逐夢</p>
+        </div>
+    </div>
+
+    <!-- Wish Input Modal -->
+    <div class="modal-overlay" id="wishModal" role="dialog" aria-modal="true" aria-label="留下祝福便簽">
+        <div class="wish-modal-card">
+            <button class="modal-dismiss-btn" id="closeWishModalBtn" aria-label="關閉">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="wish-modal-title">
+                <i class="fa-solid fa-heart" style="color: var(--theme-primary);"></i> 留下祝福小便簽
+            </h3>
+            <p class="wish-modal-sub">你的暖心話語，會直接貼在雅心的便簽牆上喔！</p>
+
+            <!-- Sticker Picker -->
+            <label class="form-label-txt">選擇心情貼紙：</label>
+            <div class="stickers-selector-row" id="stickerGroup">
+                <div class="sticker-pick-item active" data-sticker="🌸">🌸</div>
+                <div class="sticker-pick-item" data-sticker="💖">💖</div>
+                <div class="sticker-pick-item" data-sticker="🚀">🚀</div>
+                <div class="sticker-pick-item" data-sticker="⭐">⭐</div>
+                <div class="sticker-pick-item" data-sticker="☕">☕</div>
+            </div>
+
+            <!-- Name Input -->
+            <div class="form-group-unit">
+                <label class="form-label-txt" for="wishAuthorInput">你的稱呼 / 暱稱：</label>
+                <input type="text" id="wishAuthorInput" class="form-input-ctrl" placeholder="例如：南應大好友、小晴..."
+                    maxlength="15">
+            </div>
+
+            <!-- Message Input -->
+            <div class="form-group-unit">
+                <label class="form-label-txt" for="wishContentInput">祝福內容：</label>
+                <textarea id="wishContentInput" class="form-textarea-ctrl" placeholder="寫下一句溫暖鼓勵的話..."
+                    maxlength="80"></textarea>
+                <div class="preset-pills-row">
+                    <span class="preset-pill-item" data-text="小專衝刺必勝！妳超棒的 🚀">小專衝刺必勝！</span>
+                    <span class="preset-pill-item" data-text="天天開心，戀愛超級甜蜜！💕">天天開心甜蜜！</span>
+                    <span class="preset-pill-item" data-text="最棒的生命勇者，永遠支持妳！✨">永遠支持妳！</span>
+                </div>
+            </div>
+
+            <div class="modal-action-row">
+                <button type="button" class="btn-modal-cancel" id="cancelWishBtn">取消</button>
+                <button type="button" class="btn-modal-submit" id="submitWishBtn">
+                    <i class="fa-solid fa-paper-plane"></i> 貼上便簽
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div class="toast" id="toastBox">
+    <div class="toast-banner" id="toastBox">
         <i class="fa-solid fa-circle-check"></i>
         <span id="toastMsg">已成功複製名片連結！</span>
     </div>
 
     <!-- Interactive Scripts -->
     <script>
-        // Theme Toggle (Dark / Light)
+        /* ===== Floating Hearts Background Canvas Engine ===== */
+        const heartCanvas = document.getElementById('heartCanvas');
+        const heartCtx = heartCanvas.getContext('2d');
+        let hearts = [];
+        let canvasW, canvasH;
+        let heartTime = 0;
+
+        function resizeCanvas() {
+            canvasW = heartCanvas.width = window.innerWidth;
+            canvasH = heartCanvas.height = window.innerHeight;
+            initHearts();
+        }
+
+        function initHearts() {
+            hearts = [];
+            // Responsive heart count: optimal density without cluttering
+            const count = Math.max(25, Math.min(55, Math.floor((canvasW * canvasH) / 28000)));
+            for (let i = 0; i < count; i++) {
+                hearts.push({
+                    baseX: Math.random() * canvasW,
+                    y: Math.random() * canvasH,
+                    size: Math.random() * 14 + 10, // 10px to 24px
+                    speed: Math.random() * 0.4 + 0.2, // soft, soothing upward drift
+                    swayAmp: Math.random() * 24 + 10,
+                    swaySpeed: Math.random() * 0.018 + 0.008,
+                    swayOffset: Math.random() * Math.PI * 2,
+                    rot: (Math.random() - 0.5) * 0.4,
+                    rotSpeed: (Math.random() - 0.5) * 0.015,
+                    alpha: Math.random() * 0.42 + 0.18,
+                    colorIndex: Math.floor(Math.random() * 5)
+                });
+            }
+        }
+
+        function getPaletteHeartColors(palette, isDark) {
+            switch (palette) {
+                case 'ocean':
+                    return isDark
+                        ? ['#38bdf8', '#0ea5e9', '#06b6d4', '#60a5fa', '#93c5fd']
+                        : ['#0284c7', '#0ea5e9', '#38bdf8', '#06b6d4', '#0284c7'];
+                case 'mint':
+                    return isDark
+                        ? ['#34d399', '#10b981', '#6ee7b7', '#059669', '#a7f3d0']
+                        : ['#059669', '#10b981', '#34d399', '#047857', '#059669'];
+                case 'sunset':
+                    return isDark
+                        ? ['#fb923c', '#f97316', '#fbbf24', '#f43f5e', '#fdba74']
+                        : ['#ea580c', '#f97316', '#f43f5e', '#d97706', '#ea580c'];
+                case 'lavender':
+                    return isDark
+                        ? ['#a78bfa', '#8b5cf6', '#c084fc', '#818cf8', '#ddd6fe']
+                        : ['#7c3aed', '#8b5cf6', '#a78bfa', '#6366f1', '#7c3aed'];
+                case 'sakura':
+                    return isDark
+                        ? ['#f472b6', '#ec4899', '#fb7185', '#f43f5e', '#fbcfe8']
+                        : ['#db2777', '#ec4899', '#f472b6', '#e11d48', '#db2777'];
+                case 'gold':
+                    return isDark
+                        ? ['#fbbf24', '#f59e0b', '#d97706', '#fde68a', '#fcd34d']
+                        : ['#d97706', '#f59e0b', '#b45309', '#d97706', '#f59e0b'];
+                default:
+                    return ['#38bdf8', '#0ea5e9', '#06b6d4'];
+            }
+        }
+
+        // Beautiful smooth vector heart path
+        function drawHeartShape(ctx, x, y, size, rotation, alpha, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.shadowBlur = size * 0.9;
+            ctx.shadowColor = color;
+
+            const s = size / 32;
+            ctx.beginPath();
+            // Start at top middle cleft
+            ctx.moveTo(0, -6 * s);
+            // Left lobe
+            ctx.bezierCurveTo(-14 * s, -22 * s, -30 * s, 2 * s, 0, 24 * s);
+            // Right lobe
+            ctx.bezierCurveTo(30 * s, 2 * s, 14 * s, -22 * s, 0, -6 * s);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawHearts() {
+            heartCtx.clearRect(0, 0, canvasW, canvasH);
+            heartTime += 1;
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const currentPalette = document.documentElement.getAttribute('data-palette') || 'ocean';
+            const heartColors = getPaletteHeartColors(currentPalette, isDark);
+
+            for (let h of hearts) {
+                h.y -= h.speed;
+                const sway = Math.sin(heartTime * h.swaySpeed + h.swayOffset) * h.swayAmp;
+                const currentX = h.baseX + sway;
+                h.rot += h.rotSpeed;
+
+                const color = heartColors[h.colorIndex % heartColors.length];
+                drawHeartShape(heartCtx, currentX, h.y, h.size, h.rot, h.alpha, color);
+
+                if (h.y < -35) {
+                    h.y = canvasH + 25;
+                    h.baseX = Math.random() * canvasW;
+                }
+            }
+            requestAnimationFrame(drawHearts);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        requestAnimationFrame(drawHearts);
+
+        /* ===== Palette & Theme Manager ===== */
+        const htmlElement = document.documentElement;
+        const paletteBtn = document.getElementById('paletteBtn');
+        const paletteDropdown = document.getElementById('paletteDropdown');
+        const palettePills = document.querySelectorAll('.palette-pill');
         const themeToggleBtn = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
-        const htmlElement = document.documentElement;
 
-        // Check local storage for theme
+        const paletteNames = {
+            'ocean': '🌊 蔚藍海風',
+            'mint': '🌿 晨曦薄荷',
+            'sunset': '🌅 落日暖陽',
+            'lavender': '🍇 星河幻紫',
+            'sakura': '🌸 浪漫櫻粉',
+            'gold': '✨ 黑金輕奢'
+        };
+
+        const savedPalette = localStorage.getItem('mia_palette') || 'ocean';
+        applyPalette(savedPalette, false);
+
+        function applyPalette(paletteKey, notify = true) {
+            htmlElement.setAttribute('data-palette', paletteKey);
+            localStorage.setItem('mia_palette', paletteKey);
+
+            palettePills.forEach(p => {
+                if (p.getAttribute('data-color') === paletteKey) {
+                    p.classList.add('active');
+                } else {
+                    p.classList.remove('active');
+                }
+            });
+
+            if (notify) {
+                showToast(`🎨 已切換為【${paletteNames[paletteKey] || paletteKey}】主題色系！`);
+            }
+        }
+
+        paletteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            paletteDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!paletteDropdown.contains(e.target) && e.target !== paletteBtn) {
+                paletteDropdown.classList.remove('show');
+            }
+        });
+
+        palettePills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const color = pill.getAttribute('data-color');
+                applyPalette(color, true);
+                paletteDropdown.classList.remove('show');
+                playChime(1.1);
+            });
+        });
+
         const savedTheme = localStorage.getItem('mia_theme') || 'dark';
         applyTheme(savedTheme);
 
@@ -1070,14 +2771,56 @@
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
+            showToast(newTheme === 'dark' ? '🌙 已切換為深色質感模式' : '☀️ 已切換為明亮晨曦模式');
         });
 
-        // Photo Modal Lightbox
+        /* ===== Scroll Progress Bar & Back to Top ===== */
+        const scrollProgressLine = document.getElementById('scrollProgressLine');
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = docHeight > 0 ? (scrollTop / docHeight) : 0;
+            scrollProgressLine.style.transform = `scaleX(${ratio})`;
+
+            if (scrollTop > 350) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ===== 3D Avatar Tilt Effect ===== */
         const avatarTrigger = document.getElementById('avatarTrigger');
+        const avatarFrame = avatarTrigger.querySelector('.avatar-frame');
+
+        avatarTrigger.addEventListener('mousemove', (e) => {
+            const rect = avatarTrigger.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            const rotX = (y / (rect.height / 2)) * -14;
+            const rotY = (x / (rect.width / 2)) * 14;
+            avatarFrame.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.08)`;
+        });
+
+        avatarTrigger.addEventListener('mouseleave', () => {
+            avatarFrame.style.transform = `perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)`;
+        });
+
+        /* ===== Lightbox Modal ===== */
         const photoModal = document.getElementById('photoModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
 
-        function openModal() {
+        function openModal(imgSrc, caption) {
+            lightboxImg.src = imgSrc || 'meinv.jpeg';
+            lightboxCaption.textContent = caption || '湯雅心 Mia ✨ 珍惜生活，勇敢逐夢';
             photoModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1087,71 +2830,211 @@
             document.body.style.overflow = '';
         }
 
-        avatarTrigger.addEventListener('click', openModal);
+        avatarTrigger.addEventListener('click', () => {
+            openModal('meinv.jpeg', '湯雅心 Mia ✨ 陽光開朗的女孩');
+        });
+
+        document.querySelectorAll('.gallery-trigger').forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-title');
+                const sub = card.getAttribute('data-sub');
+                openModal('meinv.jpeg', `${title} — ${sub}`);
+            });
+        });
+
         closeModalBtn.addEventListener('click', closeModal);
         photoModal.addEventListener('click', (e) => {
             if (e.target === photoModal) closeModal();
         });
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && photoModal.classList.contains('active')) closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeWishModal();
+                paletteDropdown.classList.remove('show');
+            }
         });
 
-        // Cheer Heart Button & Floating Particle Effect
+        /* ===== Web Audio Synthesizer: Sweet Pentatonic Chimes & Music Box ===== */
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        let chimeIndex = 0;
+        const chimeNotes = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51];
+
+        function playChime(pitchMultiplier = 1) {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                const baseFreq = chimeNotes[chimeIndex % chimeNotes.length];
+                chimeIndex++;
+
+                osc.frequency.setValueAtTime(baseFreq * pitchMultiplier, ctx.currentTime);
+                gain.gain.setValueAtTime(0.09, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.45);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.45);
+            } catch (err) { }
+        }
+
+        let isMusicPlaying = false;
+        let musicTimer = null;
+        let chordIndex = 0;
+        const loFiProgression = [
+            [261.63, 329.63, 392.00, 493.88], // C, E, G, B
+            [220.00, 261.63, 329.63, 392.00], // A, C, E, G
+            [174.61, 261.63, 329.63, 392.00], // F, C, E, G
+            [196.00, 246.94, 293.66, 392.00]  // G, B, D, G
+        ];
+
+        function playMusicNote(freq, delay, duration = 1.4) {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+
+                gain.gain.setValueAtTime(0.0001, ctx.currentTime + delay);
+                gain.gain.exponentialRampToValueAtTime(0.045, ctx.currentTime + delay + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delay + duration);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + delay);
+                osc.stop(ctx.currentTime + delay + duration);
+            } catch (err) { }
+        }
+
+        function playChordStep() {
+            if (!isMusicPlaying) return;
+            const chord = loFiProgression[chordIndex % loFiProgression.length];
+            chordIndex++;
+
+            chord.forEach((freq, idx) => {
+                playMusicNote(freq * 1.5, idx * 0.35, 1.6);
+            });
+
+            if (Math.random() > 0.4) {
+                const highNotes = [1046.50, 1174.66, 1318.51, 1567.98];
+                const note = highNotes[Math.floor(Math.random() * highNotes.length)];
+                playMusicNote(note, 1.2, 0.8);
+            }
+
+            musicTimer = setTimeout(playChordStep, 2400);
+        }
+
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const vinylDisc = document.getElementById('vinylDisc');
+        const equalizerBox = document.getElementById('equalizerBox');
+        const musicStatusBadge = document.getElementById('musicStatusBadge');
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+
+        function toggleMusic() {
+            isMusicPlaying = !isMusicPlaying;
+            if (isMusicPlaying) {
+                getAudioContext();
+                vinylDisc.classList.add('playing');
+                equalizerBox.classList.add('playing');
+                playIcon.className = 'fa-solid fa-pause';
+                musicStatusBadge.innerHTML = '<i class="fa-solid fa-compact-disc fa-spin"></i> 正在播放暖心旋律...';
+                musicToggleBtn.classList.add('active');
+                playChordStep();
+                showToast('🎵 已開啟微光點唱機・正在播放療癒旋律');
+            } else {
+                clearTimeout(musicTimer);
+                vinylDisc.classList.remove('playing');
+                equalizerBox.classList.remove('playing');
+                playIcon.className = 'fa-solid fa-play';
+                musicStatusBadge.innerHTML = '<i class="fa-solid fa-compact-disc"></i> 點擊播放暖心旋律';
+                musicToggleBtn.classList.remove('active');
+                showToast('☕ 微光點唱機已暫停');
+            }
+        }
+
+        playBtn.addEventListener('click', toggleMusic);
+        musicToggleBtn.addEventListener('click', toggleMusic);
+
+        /* ===== Supercharged Cheer Button & Combo System ===== */
         const cheerBtn = document.getElementById('cheerBtn');
         const heartCounter = document.getElementById('heartCounter');
+        const statLikes = document.getElementById('statLikes');
+        const comboBadge = document.getElementById('comboBadge');
+
         let likes = parseInt(localStorage.getItem('mia_hearts') || '520', 10);
         heartCounter.textContent = likes;
+        statLikes.textContent = likes + '+';
 
-        // Web Audio Synthesizer for sweet sparkle chime
-        let audioCtx = null;
-        function playChime() {
-            try {
-                if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                // Sweet pleasant musical note
-                const notes = [523.25, 659.25, 783.99, 1046.50];
-                const note = notes[Math.floor(Math.random() * notes.length)];
-                osc.frequency.setValueAtTime(note, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.35);
-            } catch (err) {
-                // Audio gracefully ignored if unavailable
+        let comboCount = 0;
+        let comboTimeout = null;
+
+        function getThemeParticles() {
+            const currentPalette = htmlElement.getAttribute('data-palette') || 'ocean';
+            switch (currentPalette) {
+                case 'ocean':
+                    return ['💙', '🍔', '🌊', '🐬', '✨', '💎', '⭐', '🥰'];
+                case 'mint':
+                    return ['💚', '🌿', '🍃', '🌱', '✨', '🍀', '🥰'];
+                case 'sunset':
+                    return ['🧡', '🌅', '☀️', '🍁', '✨', '💛', '🥰'];
+                case 'lavender':
+                    return ['💜', '🍇', '🔮', '✨', '⭐', '🌸', '🥰'];
+                case 'gold':
+                    return ['💛', '✨', '👑', '💫', '🌟', '🪙', '🥰'];
+                default:
+                    return ['💖', '❤️', '🌸', '✨', '💕', '🥰', '⭐'];
             }
         }
 
         cheerBtn.addEventListener('click', (e) => {
             likes++;
             heartCounter.textContent = likes;
+            statLikes.textContent = likes + '+';
             localStorage.setItem('mia_hearts', likes);
-            playChime();
 
-            // Spawn floating hearts
+            comboCount++;
+            clearTimeout(comboTimeout);
+            comboBadge.textContent = `Combo x${comboCount} ${comboCount >= 10 ? '🔥 超級應援!' : '✨'}`;
+            comboBadge.classList.add('show');
+            comboTimeout = setTimeout(() => {
+                comboBadge.classList.remove('show');
+                comboCount = 0;
+            }, 1800);
+
+            playChime(1 + Math.min(comboCount * 0.05, 0.6));
+
             const rect = cheerBtn.getBoundingClientRect();
-            const heartIcons = ['💖', '❤️', '🌸', '✨', '💕', '🥰', '⭐'];
+            const particles = getThemeParticles();
 
-            for (let i = 0; i < 3; i++) {
+            const particleCount = comboCount >= 5 ? 5 : 3;
+            for (let i = 0; i < particleCount; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.className = 'floating-heart';
-                    heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                    heart.textContent = particles[Math.floor(Math.random() * particles.length)];
 
-                    const startX = rect.left + rect.width / 2 + (Math.random() * 40 - 20);
+                    const startX = rect.left + rect.width / 2 + (Math.random() * 50 - 25);
                     const startY = rect.top + (Math.random() * 20);
 
-                    const dx = (Math.random() * 80 - 40) + 'px';
-                    const dx2 = (Math.random() * 120 - 60) + 'px';
-                    const rot = (Math.random() * 40 - 20) + 'deg';
+                    const dx = (Math.random() * 100 - 50) + 'px';
+                    const dx2 = (Math.random() * 160 - 80) + 'px';
+                    const rot = (Math.random() * 50 - 25) + 'deg';
 
                     heart.style.left = `${startX}px`;
                     heart.style.top = `${startY}px`;
@@ -1160,14 +3043,147 @@
                     heart.style.setProperty('--rot', rot);
 
                     document.body.appendChild(heart);
-
                     setTimeout(() => heart.remove(), 1600);
-                }, i * 90);
+                }, i * 75);
             }
         });
 
-        // Share Profile Button
-        const shareBtn = document.getElementById('shareBtn');
+        /* ===== Wishes Wall Data & Logic ===== */
+        const initialWishes = [
+            {
+                sticker: '🌊',
+                author: '好友 小晴',
+                msg: '小專衝刺加油！妳的作品一定超級棒的，期待畢業展大放異彩！✨',
+                color: 'sticky-blue',
+                time: '今天'
+            },
+            {
+                sticker: '💙',
+                author: '暖心小夥伴',
+                msg: '看到妳燦爛的笑容就覺得充滿元氣！談戀愛也要一直甜甜蜜蜜喔～🥰',
+                color: 'sticky-mint',
+                time: '今天'
+            },
+            {
+                sticker: '🌟',
+                author: '南應大同學',
+                msg: '生性樂觀的雅心最閃閃發光，無論面對什麼都是真正的生命勇者！💪',
+                color: 'sticky-purple',
+                time: '昨天'
+            },
+            {
+                sticker: '🎵',
+                author: '歌迷朋友',
+                msg: '超喜歡聽妳放鬆唱歌，真摯的歌聲總能治癒身邊所有人！🌷',
+                color: 'sticky-amber',
+                time: '前天'
+            }
+        ];
+
+        const wishesGrid = document.getElementById('wishesGrid');
+        let currentWishes = JSON.parse(localStorage.getItem('mia_wishes_v3')) || initialWishes;
+
+        function renderWishes() {
+            wishesGrid.innerHTML = '';
+            currentWishes.forEach((w) => {
+                const note = document.createElement('div');
+                note.className = `wish-sticky-note ${w.color || 'sticky-blue'}`;
+                note.innerHTML = `
+                    <span class="sticky-pin-icon">${w.sticker || '✨'}</span>
+                    <p class="sticky-msg-text">${escapeHtml(w.msg)}</p>
+                    <div class="sticky-footer-meta">
+                        <span class="sticky-author-name">— ${escapeHtml(w.author)}</span>
+                        <span>${w.time || '剛才'}</span>
+                    </div>
+                `;
+                wishesGrid.appendChild(note);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        renderWishes();
+
+        /* Wish Modal Handlers */
+        const wishModal = document.getElementById('wishModal');
+        const openWishModalBtn = document.getElementById('openWishModalBtn');
+        const closeWishModalBtn = document.getElementById('closeWishModalBtn');
+        const cancelWishBtn = document.getElementById('cancelWishBtn');
+        const submitWishBtn = document.getElementById('submitWishBtn');
+        const wishAuthorInput = document.getElementById('wishAuthorInput');
+        const wishContentInput = document.getElementById('wishContentInput');
+        const stickerOptions = document.querySelectorAll('.sticker-pick-item');
+
+        let selectedSticker = '🌸';
+        stickerOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                stickerOptions.forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                selectedSticker = opt.getAttribute('data-sticker');
+            });
+        });
+
+        document.querySelectorAll('.preset-pill-item').forEach(pill => {
+            pill.addEventListener('click', () => {
+                wishContentInput.value = pill.getAttribute('data-text');
+                wishContentInput.focus();
+            });
+        });
+
+        function openWishModal() {
+            wishModal.classList.add('active');
+            wishAuthorInput.value = '';
+            wishContentInput.value = '';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => wishAuthorInput.focus(), 150);
+        }
+
+        function closeWishModal() {
+            wishModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openWishModalBtn.addEventListener('click', openWishModal);
+        closeWishModalBtn.addEventListener('click', closeWishModal);
+        cancelWishBtn.addEventListener('click', closeWishModal);
+        wishModal.addEventListener('click', (e) => {
+            if (e.target === wishModal) closeWishModal();
+        });
+
+        submitWishBtn.addEventListener('click', () => {
+            const author = wishAuthorInput.value.trim() || '好朋友';
+            const msg = wishContentInput.value.trim();
+
+            if (!msg) {
+                showToast('請先輸入給雅心的祝福語喔！✍️');
+                wishContentInput.focus();
+                return;
+            }
+
+            const colorSchemes = ['sticky-blue', 'sticky-mint', 'sticky-purple', 'sticky-amber'];
+            const randomColor = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+
+            const newWish = {
+                sticker: selectedSticker,
+                author: author,
+                msg: msg,
+                color: randomColor,
+                time: '剛才'
+            };
+
+            currentWishes.unshift(newWish);
+            localStorage.setItem('mia_wishes_v3', JSON.stringify(currentWishes));
+            renderWishes();
+            closeWishModal();
+            playChime(1.2);
+            showToast('💌 祝福便簽已成功貼在牆上！感謝你的溫暖！');
+        });
+
+        /* ===== Toast Notification Utility ===== */
         const toastBox = document.getElementById('toastBox');
         const toastMsg = document.getElementById('toastMsg');
         let toastTimeout;
@@ -1178,27 +3194,38 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toastBox.classList.remove('show');
-            }, 2600);
+            }, 2800);
         }
 
+        /* ===== Copy Instagram Handle ===== */
+        const copyIgBtn = document.getElementById('copyIgBtn');
+        copyIgBtn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText('mia._.gashin');
+                showToast('✨ 已成功複製 Instagram 帳號：@mia._.gashin');
+            } catch (err) {
+                showToast('Instagram 帳號：@mia._.gashin');
+            }
+        });
+
+        /* ===== Share Profile Button ===== */
+        const shareBtn = document.getElementById('shareBtn');
         shareBtn.addEventListener('click', async () => {
             const pageUrl = window.location.href;
             if (navigator.share) {
                 try {
                     await navigator.share({
                         title: '湯雅心 Mia 的個人主頁',
-                        text: '來看看湯雅心的個人介紹與生活！✨',
+                        text: '來看看湯雅心的個人介紹、生活動態與創作！✨',
                         url: pageUrl
                     });
                     return;
-                } catch (err) {
-                    // Fallback to clipboard
-                }
+                } catch (err) { }
             }
 
             try {
                 await navigator.clipboard.writeText(pageUrl);
-                showToast('已成功複製個人名片網址！');
+                showToast('✨ 已成功複製個人名片網址！');
             } catch (err) {
                 showToast('歡迎將網頁分享給好友！');
             }
